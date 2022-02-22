@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.coinecho
+package com.husseinrasti.coinecho.startup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.husseinrasti.coinecho.databinding.ActivityStartupBinding
 
-class MainActivity : AppCompatActivity() {
+class StartupActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityStartupBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityStartupBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
+
 }
