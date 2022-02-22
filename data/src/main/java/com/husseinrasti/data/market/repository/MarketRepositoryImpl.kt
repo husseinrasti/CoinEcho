@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.core.network
+package com.husseinrasti.data.market.repository
 
 
 /**
- * Created by Hussein Rasti on 2/22/22.
+ * Created by Hussein Rasti on 2/23/22.
  */
-object Urls {
-
-    const val MARKETS = "coin/markets"
-
+class MarketRepositoryImpl {
 }

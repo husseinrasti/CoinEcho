@@ -14,14 +14,24 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.core.network
+package com.husseinrasti.data.remoteKeys.entity
+
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 
 /**
- * Created by Hussein Rasti on 2/22/22.
+ * Created by Hussein Rasti on 2/23/22.
  */
-object Urls {
-
-    const val MARKETS = "coin/markets"
-
-}
+@Entity(tableName = "remote_keys")
+data class RemoteKeysEntity(
+    @PrimaryKey
+    @ColumnInfo(name = "type")
+    val type: String,
+    @ColumnInfo(name = "prev_key")
+    val prevKey: Int? = null,
+    @ColumnInfo(name = "next_key")
+    val nextKey: Int? = null
+)

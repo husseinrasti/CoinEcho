@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.core.network
+package com.husseinrasti.domain.market.repository
+
+import androidx.paging.PagingData
+import com.husseinrasti.domain.coin.entity.CoinEntity
+import kotlinx.coroutines.flow.Flow
 
 
 /**
  * Created by Hussein Rasti on 2/22/22.
  */
-object Urls {
+interface MarketRepository {
 
-    const val MARKETS = "coin/markets"
+    suspend fun getMarkets(body: CoinEntity.Body): Flow<PagingData<CoinEntity.Item>>
 
 }

@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.core.network
+package com.husseinrasti.data.coin.dao
+
+
+import androidx.room.Dao
 
 
 /**
- * Created by Hussein Rasti on 2/22/22.
+ * Created by Hussein Rasti on 2/23/22.
  */
-object Urls {
-
-    const val MARKETS = "coin/markets"
-
+@Dao
+interface CoinDao {
 }

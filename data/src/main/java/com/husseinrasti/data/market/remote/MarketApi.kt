@@ -14,14 +14,28 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.core.network
+package com.husseinrasti.data.market.remote
+
+import com.husseinrasti.core.network.Urls
+import com.husseinrasti.data.coin.entity.CoinResponse
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 /**
  * Created by Hussein Rasti on 2/22/22.
  */
-object Urls {
+interface MarketApi {
 
-    const val MARKETS = "coin/markets"
+    @GET(Urls.MARKETS)
+    suspend fun getMarkets(
+        @Query("vs_currency") currency: String,
+        @Query("category") category: String,
+        @Query("order") order: String,
+        @Query("per_page") limit: Int,
+        @Query("page") page: Int,
+        @Query("sparkline") sparkline: Boolean
+    ): Response<List<CoinResponse>>
 
 }

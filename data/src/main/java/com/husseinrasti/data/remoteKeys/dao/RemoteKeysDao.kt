@@ -14,14 +14,29 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.core.network
+package com.husseinrasti.data.remoteKeys.dao
+
+
+import androidx.room.*
+import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
 
 
 /**
- * Created by Hussein Rasti on 2/22/22.
+ * Created by Hussein Rasti on 2/23/22.
  */
-object Urls {
+@Dao
+interface RemoteKeysDao {
 
-    const val MARKETS = "coin/markets"
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(remoteKey: RemoteKeysEntity)
+
+    @Delete
+    suspend fun delete(remoteKey: RemoteKeysEntity)
+
+    @Query("SELECT * FROM remote_keys WHERE type = :type")
+    suspend fun fetchKeysByType(type: String): RemoteKeysEntity?
+
+    @Query("DELETE FROM remote_keys")
+    suspend fun clear()
 
 }

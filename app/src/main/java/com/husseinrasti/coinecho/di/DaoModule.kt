@@ -16,9 +16,13 @@
 
 package com.husseinrasti.coinecho.di
 
+import com.husseinrasti.coinecho.cache.AppDatabase
+import com.husseinrasti.data.coin.dao.CoinDao
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 
 /**
@@ -27,4 +31,11 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 class DaoModule {
+
+    @Provides
+    @ViewModelScoped
+    fun coinDao(appDatabase: AppDatabase): CoinDao {
+        return appDatabase.coinDao()
+    }
+
 }

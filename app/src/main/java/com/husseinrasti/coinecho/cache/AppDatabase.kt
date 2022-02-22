@@ -18,6 +18,8 @@ package com.husseinrasti.coinecho.cache
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.husseinrasti.data.coin.dao.CoinDao
+import com.husseinrasti.domain.coin.entity.CoinEntity
 
 
 /**
@@ -28,7 +30,7 @@ import androidx.room.RoomDatabase
  * below annotation is database version and the tables
  */
 @Database(
-    entities = [],
+    entities = [CoinEntity.Item::class],
     version = 1,
     exportSchema = false
 )
@@ -38,5 +40,7 @@ abstract class AppDatabase : RoomDatabase() {
      * Create all table query classes that calls dao
      * Data access object with these classes you can extract data from database
      */
+
+    abstract fun coinDao(): CoinDao
 
 }
