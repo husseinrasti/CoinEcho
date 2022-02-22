@@ -149,9 +149,7 @@ dependencies {
     implementation(DaggerHilt.daggerHilt)
     kapt(DaggerHilt.daggerHiltCompiler)
 
-//    implementation(project(BuildModules.CORE))
-//    implementation(project(BuildModules.DOMAIN))
-//    implementation(project(BuildModules.DATA))
-//    implementation(project(BuildModules.Commons.VIEWS))
-//    implementation(project(BuildModules.Commons.RESOURCES))
+    implementation(project(BuildModules.CORE))
+    implementation(project(BuildModules.DOMAIN))
+    implementation(project(BuildModules.DATA))
 }

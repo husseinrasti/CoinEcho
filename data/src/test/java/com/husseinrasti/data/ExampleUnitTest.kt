@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.coinecho
+package com.husseinrasti.data
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import org.junit.Test
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+import org.junit.Assert.*
+
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
     }
 }

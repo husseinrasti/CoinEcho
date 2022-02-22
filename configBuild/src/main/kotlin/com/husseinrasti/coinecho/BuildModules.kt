@@ -28,9 +28,6 @@ object BuildModules {
 
     object Features {}
 
-    object Commons {
-        const val RESOURCES = ":commons:resources"
-        const val VIEWS = ":commons:views"
-    }
+    object Commons {}
 
 }
