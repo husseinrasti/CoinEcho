@@ -16,9 +16,41 @@
 
 package com.husseinrasti.data.market.repository
 
+import android.content.res.Resources
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.husseinrasti.core.utils.NETWORK_PAGE_SIZE
+import com.husseinrasti.data.market.datasource.MarketPagingSource
+import com.husseinrasti.domain.coin.entity.CoinEntity
+import com.husseinrasti.domain.market.repository.MarketRepository
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+
 
 /**
  * Created by Hussein Rasti on 2/23/22.
  */
-class MarketRepositoryImpl {
+class MarketRepositoryImpl @Inject constructor(
+    private val resources: Resources,
+    private val marketPagingSource: MarketPagingSource
+) : MarketRepository {
+
+    override suspend fun getMarkets(body: CoinEntity.Body): Flow<PagingData<CoinEntity.Item>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = NETWORK_PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                marketPagingSource.apply {
+                    category = body.category
+                    currency = body.currency
+                    order = body.order
+                    sparkline = body.sparkline
+                }
+            }
+        ).flow
+    }
+
 }

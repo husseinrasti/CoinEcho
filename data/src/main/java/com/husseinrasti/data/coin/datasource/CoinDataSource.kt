@@ -14,33 +14,35 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.data.coin.dao
+package com.husseinrasti.data.coin.datasource
 
-
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
- * Created by Hussein Rasti on 2/23/22.
+ * Created by Hussein Rasti on 2/24/22.
  */
-@Dao
-interface CoinDao {
+class CoinDataSource @Inject constructor(
+    private val dao: CoinDao
+) {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(entity: CoinEntity.Item)
+    suspend fun insert(entity: CoinEntity.Item) {
+        dao.insert(entity)
+    }
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(list: List<CoinEntity.Item>)
+    suspend fun insertList(list: List<CoinEntity.Item>) {
+        dao.insert(list)
+    }
 
-    @Query("SELECT * FROM tbl_coin WHERE id=:id")
-    fun select(id: String): Flow<CoinEntity.Item>
+    fun select(id: String): Flow<CoinEntity.Item> {
+        return dao.select(id)
+    }
 
-    @Query("SELECT * FROM tbl_coin")
-    fun select(): Flow<List<CoinEntity.Item>>
+    fun select(): Flow<List<CoinEntity.Item>> {
+        return dao.select()
+    }
 
 }

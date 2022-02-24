@@ -21,7 +21,7 @@ package com.husseinrasti.core.utils
  * Created by Hussein Rasti on 2/22/22.
  */
 
-const val STARTING_PAGE_INDEX = 0
+const val STARTING_PAGE_INDEX = 1
 const val NETWORK_PAGE_SIZE = 10
 
 const val HTTP_ERROR_BAD_REQUEST = 400
