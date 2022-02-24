@@ -23,6 +23,7 @@ import androidx.paging.PagingData
 import com.husseinrasti.core.utils.NETWORK_PAGE_SIZE
 import com.husseinrasti.data.market.datasource.MarketPagingSource
 import com.husseinrasti.domain.coin.entity.CoinEntity
+import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.domain.market.repository.MarketRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -33,17 +34,17 @@ import javax.inject.Inject
  */
 class MarketRepositoryImpl @Inject constructor(
     private val resources: Resources,
-    private val marketPagingSource: MarketPagingSource
+    private val pagingSource: MarketPagingSource
 ) : MarketRepository {
 
-    override suspend fun getMarkets(body: CoinEntity.Body): Flow<PagingData<CoinEntity.Item>> {
+    override suspend fun getMarkets(body: MarketEntity.Body): Flow<PagingData<CoinEntity.Item>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                marketPagingSource.apply {
+                pagingSource.apply {
                     category = body.category
                     currency = body.currency
                     order = body.order

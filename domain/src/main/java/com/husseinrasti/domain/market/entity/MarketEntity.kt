@@ -14,28 +14,19 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.coinecho.di
-
-import com.husseinrasti.data.market.remote.MarketApi
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import javax.inject.Singleton
+package com.husseinrasti.domain.market.entity
 
 
 /**
- * Created by Hussein Rasti on 2/22/22.
+ * Created by Hussein Rasti on 2/24/22.
  */
-@Module
-@InstallIn(SingletonComponent::class)
-class ApiModule {
+class MarketEntity {
 
-    @Provides
-    @Singleton
-    fun provideMarket(retrofit: Retrofit): MarketApi {
-        return retrofit.create(MarketApi::class.java)
-    }
+    data class Body(
+        val currency: String,
+        val category: String,
+        val order: String,
+        val sparkline: Boolean
+    )
 
 }

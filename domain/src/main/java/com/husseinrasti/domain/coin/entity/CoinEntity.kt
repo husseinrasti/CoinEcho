@@ -26,13 +26,6 @@ import androidx.room.PrimaryKey
  */
 class CoinEntity {
 
-    data class Body(
-        val currency: String,
-        val category: String,
-        val order: String,
-        val sparkline: Boolean
-    )
-
     @Entity(tableName = "tbl_coin")
     data class Item(
         @PrimaryKey(autoGenerate = false)

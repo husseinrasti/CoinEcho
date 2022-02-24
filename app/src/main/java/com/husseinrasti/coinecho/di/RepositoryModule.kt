@@ -16,9 +16,15 @@
 
 package com.husseinrasti.coinecho.di
 
+import android.content.res.Resources
+import com.husseinrasti.data.market.datasource.MarketPagingSource
+import com.husseinrasti.data.market.repository.MarketRepositoryImpl
+import com.husseinrasti.domain.market.repository.MarketRepository
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 
 /**
@@ -27,4 +33,14 @@ import dagger.hilt.android.components.ViewModelComponent
 @Module
 @InstallIn(ViewModelComponent::class)
 class RepositoryModule {
+
+    @Provides
+    @ViewModelScoped
+    fun provideMarketRepository(resources: Resources, pagingSource: MarketPagingSource): MarketRepository {
+        return MarketRepositoryImpl(
+            resources = resources,
+            pagingSource = pagingSource
+        )
+    }
+
 }

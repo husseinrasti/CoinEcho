@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.domain.market.repository
+package com.husseinrasti.domain.market.usecase
 
 import androidx.paging.PagingData
+import com.husseinrasti.core.usecase.FlowUseCase
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
+import com.husseinrasti.domain.market.repository.MarketRepository
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 
 /**
- * Created by Hussein Rasti on 2/22/22.
+ * Created by Hussein Rasti on 2/24/22.
  */
-interface MarketRepository {
-
-    suspend fun getMarkets(body: MarketEntity.Body): Flow<PagingData<CoinEntity.Item>>
-
+class GetMarketsUseCase @Inject constructor(
+    private val repository: MarketRepository
+) : FlowUseCase<MarketEntity.Body, PagingData<CoinEntity.Item>> {
+    override suspend fun invoke(params: MarketEntity.Body): Flow<PagingData<CoinEntity.Item>> {
+        return repository.getMarkets(params)
+    }
 }
