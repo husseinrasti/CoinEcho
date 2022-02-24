@@ -26,7 +26,9 @@ object BuildModules {
     const val DATA = ":data"
     const val DOMAIN = ":domain"
 
-    object Features {}
+    object Features {
+        const val MARKET = ":features:market"
+    }
 
     object Commons {}
 

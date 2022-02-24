@@ -14,22 +14,21 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
+package com.husseinrasti.market
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+import androidx.lifecycle.ViewModel
+import com.husseinrasti.domain.market.usecase.GetMarketsUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+
+/**
+ * Created by Hussein Rasti on 2/24/22.
+ */
+@HiltViewModel
+class MarketViewModel @Inject constructor(
+    private val getMarketsUseCase: GetMarketsUseCase
+) : ViewModel() {
+
+
 }
-
-includeBuild("configBuild")
-
-include(
-    ":app",
-    ":core",
-    ":data",
-    ":domain",
-    ":features:market"
-)

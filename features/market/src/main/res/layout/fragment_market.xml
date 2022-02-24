@@ -14,16 +14,17 @@
   ~ limitations under the License.
   -->
 
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/startup_nav"
-    app:startDestination="@id/marketFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/marketFragment"
-        android:name="com.husseinrasti.market.MarketFragment"
-        android:label="MarketFragment"
-        tools:layout="@layout/fragment_market" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        tools:listitem="@layout/adapter_item_market" />
 
-</navigation>
+</androidx.constraintlayout.widget.ConstraintLayout>
