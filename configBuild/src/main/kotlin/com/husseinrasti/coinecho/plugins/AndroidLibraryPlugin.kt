@@ -40,7 +40,6 @@ class AndroidLibraryPlugin : Plugin<Project> {
         target.dependencies {
             addJetpackDependencies()
             addSupportDependencies()
-            addGoogleDependencies()
             addThirdPartyDependencies()
         }
     }

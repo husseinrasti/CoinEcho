@@ -24,9 +24,9 @@ class MarketEntity {
 
     data class Body(
         val currency: String,
-        val category: String,
-        val order: String,
-        val sparkline: Boolean
+        val category: String? = null,
+        val order: String? = null,
+        val sparkline: Boolean = false
     )
 
 }

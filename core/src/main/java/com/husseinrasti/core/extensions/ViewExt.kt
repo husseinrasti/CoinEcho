@@ -14,22 +14,32 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.coinecho.startup
+package com.husseinrasti.core.extensions
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.husseinrasti.coinecho.databinding.ActivityStartupBinding
-import dagger.hilt.android.AndroidEntryPoint
+import android.view.View
 
-@AndroidEntryPoint
-class StartupActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityStartupBinding
+/**
+ * Created by Hussein Rasti on 2/24/22.
+ */
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityStartupBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-    }
 
+fun View.visible() {
+    visibility = View.VISIBLE
+}
+
+fun View.inVisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.gone() {
+    visibility = View.GONE
+}
+
+fun View.visibility(show: Boolean, isGone: Boolean = true) {
+    if (show) visible() else if (isGone) gone() else inVisible()
+}
+
+fun View.notVisibility(show: Boolean, isGone: Boolean = true) {
+    if (show) if (isGone) gone() else inVisible() else visible()
 }

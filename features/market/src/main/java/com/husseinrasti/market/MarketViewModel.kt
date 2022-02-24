@@ -16,9 +16,20 @@
 
 package com.husseinrasti.market
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.husseinrasti.core.exceptions.Failure
+import com.husseinrasti.domain.coin.entity.CoinEntity
+import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.domain.market.usecase.GetMarketsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 
 
@@ -30,5 +41,33 @@ class MarketViewModel @Inject constructor(
     private val getMarketsUseCase: GetMarketsUseCase
 ) : ViewModel() {
 
+    private val _error = MutableLiveData<Failure>()
+    val error: LiveData<Failure> = _error
+    fun onError(failure: Failure) {
+        _error.postValue(failure)
+    }
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
+    fun onLoading(isLoading: Boolean) {
+        _loading.postValue(isLoading)
+    }
+
+    private val _markets = MutableLiveData<PagingData<CoinEntity.Item>>()
+    val markets: LiveData<PagingData<CoinEntity.Item>> = _markets
+    suspend fun getMarkets(body: MarketEntity.Body) {
+        onLoading(true)
+        getMarketsUseCase(body)
+            .distinctUntilChanged()
+            .cachedIn(viewModelScope)
+            .catch {
+                onLoading(false)
+                onError(Failure.Unknown)
+            }
+            .collectLatest {
+                onLoading(false)
+                _markets.postValue(it)
+            }
+    }
 
 }

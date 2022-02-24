@@ -48,13 +48,13 @@ class CoinEntity {
         @ColumnInfo(name = "image")
         val image: String,
         @ColumnInfo(name = "market_cap")
-        val marketCap: Int,
+        val marketCap: Double,
         @ColumnInfo(name = "market_cap_change_24h")
         val marketCapChange24h: Double,
         @ColumnInfo(name = "market_cap_change_percentage_24h")
         val marketCapChangePercentage24h: Double,
         @ColumnInfo(name = "market_cap_rank")
-        val marketCapRank: Int,
+        val marketCapRank: Long,
         @ColumnInfo(name = "max_supply")
         val maxSupply: Double,
         @ColumnInfo(name = "name")
@@ -68,7 +68,7 @@ class CoinEntity {
         @ColumnInfo(name = "total_supply")
         val totalSupply: Double,
         @ColumnInfo(name = "total_volume")
-        val totalVolume: Int,
+        val totalVolume: Double,
         @ColumnInfo(name = "sparkline_in_7d")
         val sparklineIn7d: List<Double>
     )

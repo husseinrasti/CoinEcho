@@ -21,6 +21,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.husseinrasti.core.extensions.load
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 
@@ -46,7 +47,9 @@ class MarketAdapter() : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHol
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(coin: CoinEntity.Item) {
-
+            binding.name.text = coin.name
+            binding.price.text = coin.currentPrice.toString()
+            binding.logo.load(coin.image)
         }
 
     }

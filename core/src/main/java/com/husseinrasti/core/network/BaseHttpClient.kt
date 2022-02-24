@@ -17,6 +17,7 @@
 package com.husseinrasti.core.network
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,6 +31,9 @@ class BaseHttpClient @Inject constructor() {
 
     val okHttpClient = OkHttpClient()
         .newBuilder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        })
         .build()
 
 }

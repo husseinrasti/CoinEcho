@@ -40,13 +40,13 @@ data class CoinResponse(
     @SerializedName("image")
     val image: String?,
     @SerializedName("market_cap")
-    val marketCap: Int?,
+    val marketCap: Double?,
     @SerializedName("market_cap_change_24h")
     val marketCapChange24h: Double?,
     @SerializedName("market_cap_change_percentage_24h")
     val marketCapChangePercentage24h: Double?,
     @SerializedName("market_cap_rank")
-    val marketCapRank: Int?,
+    val marketCapRank: Long?,
     @SerializedName("max_supply")
     val maxSupply: Double?,
     @SerializedName("name")
@@ -60,7 +60,7 @@ data class CoinResponse(
     @SerializedName("total_supply")
     val totalSupply: Double?,
     @SerializedName("total_volume")
-    val totalVolume: Int?,
+    val totalVolume: Double?,
     @SerializedName("sparkline_in_7d")
     val sparklineIn7d: Sparkline?
 ) : ResponseObject<CoinEntity.Item> {
@@ -81,7 +81,7 @@ data class CoinResponse(
             low24h = low24h ?: 0.0,
             high24h = high24h ?: 0.0,
             image = image ?: "",
-            marketCap = marketCap ?: 0,
+            marketCap = marketCap ?: 0.0,
             marketCapChange24h = marketCapChange24h ?: 0.0,
             marketCapChangePercentage24h = marketCapChangePercentage24h ?: 0.0,
             marketCapRank = marketCapRank ?: 0,
@@ -91,7 +91,7 @@ data class CoinResponse(
             priceChangePercentage24h = priceChangePercentage24h ?: 0.0,
             symbol = symbol ?: "",
             totalSupply = totalSupply ?: 0.0,
-            totalVolume = totalVolume ?: 0,
+            totalVolume = totalVolume ?: 0.0,
             sparklineIn7d = sparklineIn7d?.price ?: listOf()
         )
     }

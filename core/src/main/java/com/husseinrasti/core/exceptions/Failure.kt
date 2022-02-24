@@ -29,7 +29,7 @@ sealed class Failure : Throwable() {
     data class Validate(override val message: String?, val code: Int? = FAILED_API_VALIDATION_CODE) : Failure()
     data class BadRequest(override val message: String?, val code: Int? = HTTP_ERROR_BAD_REQUEST) : Failure()
     data class InternalServerError(override val message: String?, val code: Int? = HTTP_ERROR_INTERNAL_SERVER_ERROR) : Failure()
-    data class Unknown(override val message: String?, val code: Int? = FAILED_CODE) : Failure()
+    object Unknown : Failure()
     object Connectivity : Failure()
     object UnAuthorized : Failure()
 }
@@ -44,7 +44,7 @@ fun Throwable.toFailure(msg: String? = null): Failure = if (this is Failure) {
         is Failure.BadRequest -> Failure.BadRequest(msg ?: this.message, this.code)
         is Failure.InternalServerError -> Failure.InternalServerError(msg ?: this.message, this.code)
         is Failure.UnAuthorized -> Failure.UnAuthorized
-        else -> Failure.Unknown(msg ?: this.message)
+        else -> Failure.Unknown
     }
 }
 

@@ -18,6 +18,8 @@ package com.husseinrasti.coinecho.cache
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.husseinrasti.coinecho.cache.converter.ListTypeConverter
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.domain.coin.entity.CoinEntity
 
@@ -34,6 +36,11 @@ import com.husseinrasti.domain.coin.entity.CoinEntity
     version = 1,
     exportSchema = false
 )
+/**
+ * This is the converter for the tables
+ * Whenever you want save a value that its not valid for sqlite
+ */
+@TypeConverters(ListTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     /**

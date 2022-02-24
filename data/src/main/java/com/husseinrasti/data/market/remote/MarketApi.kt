@@ -31,8 +31,8 @@ interface MarketApi {
     @GET(Urls.MARKETS)
     suspend fun getMarkets(
         @Query("vs_currency") currency: String,
-        @Query("category") category: String,
-        @Query("order") order: String,
+        @Query("category") category: String?,
+        @Query("order") order: String?,
         @Query("per_page") limit: Int,
         @Query("page") page: Int,
         @Query("sparkline") sparkline: Boolean

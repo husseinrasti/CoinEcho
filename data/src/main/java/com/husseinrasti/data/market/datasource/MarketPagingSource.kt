@@ -34,9 +34,9 @@ class MarketPagingSource @Inject constructor(
     private val api: MarketApi
 ) : PagingSource<Int, CoinEntity.Item>() {
 
-    var category: String = ""
-    var currency: String = "usd"
-    var order: String = ""
+    var currency: String = ""
+    var category: String? = null
+    var order: String? = null
     var sparkline: Boolean = false
 
     override fun getRefreshKey(state: PagingState<Int, CoinEntity.Item>): Int? {

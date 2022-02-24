@@ -20,10 +20,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
+import com.husseinrasti.core.exceptions.Failure
+import com.husseinrasti.core.exceptions.toFailure
+import com.husseinrasti.core.extensions.visibility
+import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.market.databinding.FragmentMarketBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,7 +47,14 @@ class MarketFragment : Fragment() {
     private var _binding: FragmentMarketBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launchWhenStarted {
+            viewModel.getMarkets(MarketEntity.Body(currency = "usd"))
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentMarketBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -54,12 +67,43 @@ class MarketFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = MarketAdapter()
+        adapter.addLoadStateListener { adapterLoadingErrorHandling(it) }
+        adapter.withLoadStateFooter(LoadingStateAdapter { adapter.retry() })
         binding.recycler.adapter = adapter
-        binding.recycler.addItemDecoration(
-            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL).apply {
-                ContextCompat.getDrawable(requireContext(), R.drawable.divider)?.let { setDrawable(it) }
+        onSetupViewModel()
+    }
+
+    private fun onSetupViewModel() {
+        viewModel.markets.observe(viewLifecycleOwner) { adapter.submitData(lifecycle, it) }
+        viewModel.error.observe(viewLifecycleOwner) { onShowError(it) }
+        viewModel.loading.observe(viewLifecycleOwner) { onLoading(it) }
+    }
+
+    private fun onLoading(isLoading: Boolean) {
+        binding.progressBar.visibility(isLoading)
+    }
+
+    private fun onShowError(failure: Failure) {
+        Toast.makeText(requireContext(), "${failure.message}", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun adapterLoadingErrorHandling(combinedLoadStates: CombinedLoadStates) {
+        if (combinedLoadStates.refresh is LoadState.Loading) {
+            onLoading(true)
+        } else {
+            onLoading(false)
+            val error = when {
+                combinedLoadStates.prepend is LoadState.Error -> combinedLoadStates.prepend as LoadState.Error
+                combinedLoadStates.source.prepend is LoadState.Error -> combinedLoadStates.prepend as LoadState.Error
+                combinedLoadStates.append is LoadState.Error -> combinedLoadStates.append as LoadState.Error
+                combinedLoadStates.source.append is LoadState.Error -> combinedLoadStates.append as LoadState.Error
+                combinedLoadStates.refresh is LoadState.Error -> combinedLoadStates.refresh as LoadState.Error
+                else -> null
             }
-        )
+            error?.run {
+                onShowError(this.error.toFailure())
+            }
+        }
     }
 
 }
