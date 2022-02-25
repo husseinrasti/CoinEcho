@@ -26,6 +26,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.husseinrasti.core.exceptions.Failure
 import com.husseinrasti.core.exceptions.toFailure
 import com.husseinrasti.core.extensions.visibility
@@ -70,6 +72,7 @@ class MarketFragment : Fragment() {
         adapter.addLoadStateListener { adapterLoadingErrorHandling(it) }
         adapter.withLoadStateFooter(LoadingStateAdapter { adapter.retry() })
         binding.recycler.adapter = adapter
+        binding.recycler.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         onSetupViewModel()
     }
 
