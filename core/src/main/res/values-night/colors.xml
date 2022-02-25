@@ -9,4 +9,6 @@
     <color name="black">#000000</color>
     <color name="black_800">#262626</color>
     <color name="red_error">#cf6679</color>
+    <color name="green">#29971D</color>
+    <color name="red">#F81A43</color>
 </resources>

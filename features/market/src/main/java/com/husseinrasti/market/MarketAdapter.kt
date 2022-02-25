@@ -16,12 +16,18 @@
 
 package com.husseinrasti.market
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.husseinrasti.core.extensions.formatPrice
 import com.husseinrasti.core.extensions.load
+import com.husseinrasti.core.extensions.toDollar
+import com.husseinrasti.core.extensions.toPercent
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 
@@ -29,9 +35,12 @@ import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 /**
  * Created by Hussein Rasti on 2/24/22.
  */
-class MarketAdapter() : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
+class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
+
+    private lateinit var _context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        _context = parent.context
         return ViewHolder(
             AdapterItemMarketBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
@@ -46,9 +55,19 @@ class MarketAdapter() : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHol
         private val binding: AdapterItemMarketBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(coin: CoinEntity.Item) {
-            binding.name.text = coin.name
-            binding.price.text = coin.currentPrice.toString()
+            binding.name.text = coin.symbol
+            binding.rank.text = coin.marketCapRank.toString()
+            binding.price.text = coin.currentPrice.toDollar()
+            val percent = coin.priceChangePercentage24h.toPercent()
+            binding.percent.text = percent
+            binding.percent.setTextColor(
+                ContextCompat.getColor(
+                    _context, if (percent.contains("-")) R.color.red else R.color.green
+                )
+            )
+            binding.marketCap.text = coin.marketCap.toDollar().split(".")[0]
             binding.logo.load(coin.image)
         }
 
