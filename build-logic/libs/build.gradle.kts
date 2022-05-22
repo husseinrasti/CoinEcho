@@ -14,20 +14,7 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
-
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+plugins {
+    `kotlin-dsl`
+    `java-gradle-plugin`
 }
-
-includeBuild("build-logic")
-
-include(":app")
-include(":core")
-include(":data")
-include(":domain")
-include(":features:market")

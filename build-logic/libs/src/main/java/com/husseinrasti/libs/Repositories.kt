@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
+package com.husseinrasti.libs
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+
+/**
+ * Created by Hussein Rasti on 2/22/22.
+ */
+object Repositories {
+    const val google = "https://maven.google.com"
+    const val fabric = "https://maven.fabric.io/public"
+    const val rx = "https://oss.jfrog.org/libs-snapshot"
+    const val jitPack = "https://jitpack.io"
+    const val kotlinX = "https://kotlin.bintray.com/kotlinx/"
+    const val gradlePlugins = "https://plugins.gradle.org/m2/"
 }
-
-includeBuild("build-logic")
-
-include(":app")
-include(":core")
-include(":data")
-include(":domain")
-include(":features:market")

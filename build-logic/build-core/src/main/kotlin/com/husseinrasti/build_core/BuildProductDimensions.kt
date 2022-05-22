@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
+package com.husseinrasti.build_core
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+
+/**
+ * Created by Hussein Rasti on 2/22/22.
+ */
+object BuildProductDimensions {
+    const val ENVIRONMENT = "environment"
 }
-
-includeBuild("build-logic")
-
-include(":app")
-include(":core")
-include(":data")
-include(":domain")
-include(":features:market")

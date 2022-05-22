@@ -14,20 +14,14 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
+package com.husseinrasti
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+/**
+ * Created by Hussein Rasti on 2/22/22.
+ */
+class BuildCorePlugin : Plugin<Project> {
+    override fun apply(target: Project) {}
 }
-
-includeBuild("build-logic")
-
-include(":app")
-include(":core")
-include(":data")
-include(":domain")
-include(":features:market")

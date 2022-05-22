@@ -13,21 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import com.husseinrasti.build_core.BuildModules
 
-rootProject.name = "CoinEcho"
-
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+plugins {
+    id("core-android-library")
 }
 
-includeBuild("build-logic")
-
-include(":app")
-include(":core")
-include(":data")
-include(":domain")
-include(":features:market")
+dependencies {
+    implementation(project(BuildModules.CORE))
+}

@@ -14,20 +14,11 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
+package com.husseinrasti.libs
 
-pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
+/**
+ * Created by Hussein Rasti on 2/22/22.
+ */
+object AnnotationProcessing {
+    const val roomCompiler = "androidx.room:room-compiler:${BuildDependenciesVersions.room}"
 }
-
-includeBuild("build-logic")
-
-include(":app")
-include(":core")
-include(":data")
-include(":domain")
-include(":features:market")

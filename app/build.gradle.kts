@@ -15,9 +15,9 @@
  */
 
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
-import com.husseinrasti.coinecho.*
-import com.husseinrasti.coinecho.BuildType
-import com.husseinrasti.coinecho.dependencies.*
+import com.husseinrasti.build_core.*
+import com.husseinrasti.build_core.BuildType
+import com.husseinrasti.libs.*
 
 plugins {
     id("com.android.application")
@@ -28,7 +28,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 //    id("com.google.gms.google-services")
 //    id("com.google.firebase.crashlytics")
-    id("coinecho-config")
+    id("core-plugin")
 }
 
 android {
