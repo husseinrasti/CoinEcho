@@ -23,6 +23,7 @@ package com.husseinrasti.build_core
 object BuildModules {
     const val APP = ":app"
     const val CORE = ":core"
+    const val COMPONENTS = ":components"
     const val DATA = ":data"
     const val DOMAIN = ":domain"
 
@@ -30,6 +31,9 @@ object BuildModules {
         const val MARKET = ":features:market"
     }
 
-    object Commons {}
+    object Core {
+        const val MODEL = ":core-model"
+        const val NETWORK = ":core-network"
+    }
 
 }

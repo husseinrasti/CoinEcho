@@ -17,7 +17,7 @@
 package com.husseinrasti.data.coin.entity
 
 import com.google.gson.annotations.SerializedName
-import com.husseinrasti.core.mapper.ResponseObject
+import com.husseinrasti.core.model.ResponseObject
 import com.husseinrasti.domain.coin.entity.CoinEntity
 
 data class CoinResponse(

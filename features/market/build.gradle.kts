@@ -21,5 +21,6 @@ plugins {
 
 dependencies {
     implementation(project(BuildModules.CORE))
+    implementation(project(BuildModules.Core.MODEL))
     implementation(project(BuildModules.DOMAIN))
 }

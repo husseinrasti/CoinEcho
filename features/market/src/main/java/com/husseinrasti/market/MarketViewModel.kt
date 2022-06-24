@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.husseinrasti.core.exceptions.Failure
+import com.husseinrasti.core.model.Failure
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.domain.market.usecase.GetMarketsUseCase
