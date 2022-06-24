@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.husseinrasti.build_core.BuildModules
 import com.husseinrasti.build_core.BuildAndroidConfig
 
 plugins {
@@ -27,14 +26,12 @@ android {
             buildConfigField("String", "SHARED_PREF_NAME", "\"" + BuildAndroidConfig.SHARED_PREF_NAME + "\"")
             buildConfigField("String", "DATABASE_NAME", "\"" + BuildAndroidConfig.DATABASE_NAME + "\"")
             buildConfigField("String", "VERSION_NAME", "\"" + BuildAndroidConfig.VERSION_NAME + "\"")
-            buildConfigField("String", "BASE_URL", "\"" + BuildAndroidConfig.BASE_URL + "\"")
         }
         debug {
             buildConfigField("String", "APPLICATION_BASE_ID", "\"" + BuildAndroidConfig.APPLICATION_ID + "\"")
             buildConfigField("String", "SHARED_PREF_NAME", "\"" + BuildAndroidConfig.SHARED_PREF_NAME + "\"")
             buildConfigField("String", "DATABASE_NAME", "\"" + BuildAndroidConfig.DATABASE_NAME + "\"")
             buildConfigField("String", "VERSION_NAME", "\"" + BuildAndroidConfig.VERSION_NAME + "\"")
-            buildConfigField("String", "BASE_URL", "\"" + BuildAndroidConfig.BASE_URL + "\"")
         }
     }
 }

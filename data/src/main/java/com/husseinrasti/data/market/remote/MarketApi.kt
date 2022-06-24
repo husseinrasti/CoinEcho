@@ -16,7 +16,7 @@
 
 package com.husseinrasti.data.market.remote
 
-import com.husseinrasti.core.network.Urls
+import com.husseinrasti.core.network.routes.MarketRoute
 import com.husseinrasti.data.coin.entity.CoinResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,7 +28,7 @@ import retrofit2.http.Query
  */
 interface MarketApi {
 
-    @GET(Urls.MARKETS)
+    @GET(MarketRoute.MARKETS)
     suspend fun getMarkets(
         @Query("vs_currency") currency: String,
         @Query("category") category: String?,

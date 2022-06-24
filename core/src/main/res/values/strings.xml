@@ -16,7 +16,4 @@
 
 <resources>
     <string name="app_name">CoinEcho</string>
-
-    <string name="msg_error">Something went wrong.</string>
-    <string name="msg_empty">No results found.</string>
 </resources>
