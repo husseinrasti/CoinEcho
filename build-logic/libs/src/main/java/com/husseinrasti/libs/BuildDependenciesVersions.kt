@@ -34,7 +34,7 @@ object BuildDependenciesVersions {
     const val preferenceKtx = "1.1.1"
     const val fragmentKtx = "1.4.0"
     const val activityKtx = "1.4.0"
-    const val daggerHilt = "2.39"
+    const val daggerHilt = "2.42"
     const val rxJava = "3.0.0"
     const val rxBinding = "2.0.0"
     const val room = "2.3.0"

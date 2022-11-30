@@ -32,7 +32,7 @@ object PluginsVersions {
     const val GRADLE_ANDROID = "7.0.4"
     const val KOTLIN = "1.6.10"
     const val DOKKA = "0.10.0"
-    const val DAGGER_HILT = "2.39"
+    const val DAGGER_HILT = "2.42"
     const val NAVIGATION = "2.3.5"
 }
 
