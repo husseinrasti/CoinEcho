@@ -19,18 +19,12 @@ package com.husseinrasti.coinecho.di
 import android.app.Application
 import android.content.res.Resources
 import androidx.room.Room
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.husseinrasti.coinecho.cache.AppDatabase
 import com.husseinrasti.core.BuildConfig
-import com.husseinrasti.core.network.BaseHttpClient
-import com.husseinrasti.core.network.BaseRetrofit
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
 import javax.inject.Singleton
 
 
@@ -45,22 +39,6 @@ class AppModule {
     @Singleton
     fun resources(application: Application): Resources {
         return application.resources
-    }
-
-    @Provides
-    @Singleton
-    fun gson(): Gson {
-        return GsonBuilder().create()
-    }
-
-    @Provides
-    fun okHttpClient(baseHttpClient: BaseHttpClient): OkHttpClient {
-        return baseHttpClient.okHttpClient
-    }
-
-    @Provides
-    fun retrofit(baseRetrofit: BaseRetrofit): Retrofit {
-        return baseRetrofit.retrofit
     }
 
     @Provides

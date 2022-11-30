@@ -24,12 +24,13 @@ pluginManagement {
     }
 }
 
-includeBuild("configBuild")
+includeBuild("build-logic")
 
-include(
-    ":app",
-    ":core",
-    ":data",
-    ":domain",
-    ":features:market"
-)
+include(":app")
+include(":core")
+include(":data")
+include(":domain")
+include(":features:market")
+include(":components")
+include(":core-network")
+include(":core-model")

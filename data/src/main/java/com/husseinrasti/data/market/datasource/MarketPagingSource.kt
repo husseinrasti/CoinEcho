@@ -19,8 +19,8 @@ package com.husseinrasti.data.market.datasource
 import android.content.res.Resources
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.husseinrasti.core.network.fetchPage
-import com.husseinrasti.core.utils.STARTING_PAGE_INDEX
+import com.husseinrasti.core.network.callback.fetchPage
+import com.husseinrasti.core.model.STARTING_PAGE_INDEX
 import com.husseinrasti.data.market.remote.MarketApi
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import javax.inject.Inject

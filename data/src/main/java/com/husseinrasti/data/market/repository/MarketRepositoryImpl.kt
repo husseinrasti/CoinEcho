@@ -20,7 +20,7 @@ import android.content.res.Resources
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.husseinrasti.core.utils.NETWORK_PAGE_SIZE
+import com.husseinrasti.core.model.NETWORK_PAGE_SIZE
 import com.husseinrasti.data.market.datasource.MarketPagingSource
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity

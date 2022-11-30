@@ -28,8 +28,8 @@ import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.husseinrasti.core.exceptions.Failure
-import com.husseinrasti.core.exceptions.toFailure
+import com.husseinrasti.core.model.Failure
+import com.husseinrasti.core.model.toFailure
 import com.husseinrasti.core.extensions.visibility
 import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.market.databinding.FragmentMarketBinding
