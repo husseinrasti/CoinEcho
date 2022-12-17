@@ -22,23 +22,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.husseinrasti.core.extensions.visibility
 import com.husseinrasti.core.model.Failure
 import com.husseinrasti.core.model.toFailure
-import com.husseinrasti.core.extensions.visibility
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.market.databinding.FragmentMarketBinding
-import dagger.Module
 import dagger.hilt.android.AndroidEntryPoint
 
 

@@ -27,7 +27,8 @@ import kotlinx.parcelize.Parcelize
 /**
  * Created by Hussein Rasti on 2/22/22.
  */
-class CoinEntity {
+
+class CoinEntity : java.io.Serializable{
     @Parcelize
     @Entity(tableName = "tbl_coin")
     data class Item(
