@@ -15,13 +15,8 @@
  */
 
 package com.husseinrasti.data.remoteKeys.dao
-
-
 import androidx.room.*
 import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
-import java.util.concurrent.Flow
-
-
 /**
  * Created by Hussein Rasti on 2/23/22.
  */
@@ -43,7 +38,6 @@ interface RemoteKeysDao {
     @Query("DELETE FROM remote_keys")
     suspend fun clear()
 
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRemoteKeys(list: List<RemoteKeysEntity>?)
 
@@ -52,11 +46,4 @@ interface RemoteKeysDao {
 
     @Query("delete from remote_keys")
     suspend fun deleteAllRemoteKeys()
-
-    @Query("select * from remote_keys")
-    suspend fun getAllRemotes():List<RemoteKeysEntity>?
-
-
-
-
 }

@@ -30,20 +30,8 @@ class CoinDataSource @Inject constructor(
     private val dao: CoinDao
 ) {
 
-    suspend fun insert(entity: CoinEntity.Item) {
-        dao.insert(entity)
-    }
-
     suspend fun insertList(list: List<CoinEntity.Item>?) {
         dao.insert(list)
-    }
-
-    fun select(id: String): Flow<CoinEntity.Item> {
-        return dao.select(id)
-    }
-
-    fun select(): Flow<List<CoinEntity.Item>> {
-        return dao.select()
     }
 
     suspend fun deleteAll() {
@@ -53,5 +41,4 @@ class CoinDataSource @Inject constructor(
     fun getCoin():PagingSource<Int, CoinEntity.Item>{
         return dao.getCoin()
     }
-
 }

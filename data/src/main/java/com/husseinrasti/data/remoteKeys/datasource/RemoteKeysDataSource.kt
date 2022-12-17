@@ -15,13 +15,9 @@
  */
 
 package com.husseinrasti.data.remoteKeys.datasource
-
-
 import com.husseinrasti.data.remoteKeys.dao.RemoteKeysDao
 import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
 import javax.inject.Inject
-
-
 /**
  * Created by Hussein Rasti on 2/23/22.
  */
@@ -31,19 +27,6 @@ class RemoteKeysDataSource @Inject constructor(private val dao: RemoteKeysDao) {
         dao.insert(remoteKey)
     }
 
-    suspend fun insertKey(remoteKey:RemoteKeysEntity) {
-        dao.insertOneKey(remoteKey)
-    }
-
-
-    suspend fun delete(remoteKey: RemoteKeysEntity) {
-        dao.delete(remoteKey)
-    }
-
-    suspend fun fetchKeysByType(type: String): RemoteKeysEntity? {
-        return dao.fetchKeysByType(type)
-    }
-
    suspend fun getRemoteKey(type: String): RemoteKeysEntity? {
         return dao.getAllRemoteKeys(type)
     }
@@ -51,9 +34,4 @@ class RemoteKeysDataSource @Inject constructor(private val dao: RemoteKeysDao) {
     suspend fun deleteAllRemoteKeys() {
         dao.deleteAllRemoteKeys()
     }
-
-    suspend fun getAllRemotes(): List<RemoteKeysEntity>? {
-        return dao.getAllRemotes()
-    }
-
 }

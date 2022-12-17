@@ -16,8 +16,6 @@
 
 package com.husseinrasti.data.coin.dao
 
-
-import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -25,8 +23,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import kotlinx.coroutines.flow.Flow
-
-
 /**
  * Created by Hussein Rasti on 2/23/22.
  */
@@ -50,5 +46,4 @@ interface CoinDao {
 
     @Query("SELECT * FROM tbl_coin")
      fun getCoin():PagingSource<Int,CoinEntity.Item>
-
 }
