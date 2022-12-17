@@ -71,7 +71,8 @@ class CoinEntity {
         val totalVolume: Double,
         @ColumnInfo(name = "sparkline_in_7d")
         val sparklineIn7d: List<Double>,
-
+        @ColumnInfo(name = "bookmarked")
+        val bookmarked: Boolean = false
     )
 
 }
