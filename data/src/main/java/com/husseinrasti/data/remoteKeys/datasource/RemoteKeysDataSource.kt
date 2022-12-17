@@ -27,9 +27,14 @@ import javax.inject.Inject
  */
 class RemoteKeysDataSource @Inject constructor(private val dao: RemoteKeysDao) {
 
-    suspend fun insert(remoteKey: RemoteKeysEntity) {
+    suspend fun insertKeys(remoteKey:List<RemoteKeysEntity>) {
         dao.insert(remoteKey)
     }
+
+    suspend fun insertKey(remoteKey:RemoteKeysEntity) {
+        dao.insertOneKey(remoteKey)
+    }
+
 
     suspend fun delete(remoteKey: RemoteKeysEntity) {
         dao.delete(remoteKey)
@@ -39,8 +44,16 @@ class RemoteKeysDataSource @Inject constructor(private val dao: RemoteKeysDao) {
         return dao.fetchKeysByType(type)
     }
 
-    suspend fun clear() {
-        dao.clear()
+   suspend fun getRemoteKey(type: String): RemoteKeysEntity? {
+        return dao.getAllRemoteKeys(type)
+    }
+
+    suspend fun deleteAllRemoteKeys() {
+        dao.deleteAllRemoteKeys()
+    }
+
+    suspend fun getAllRemotes(): List<RemoteKeysEntity>? {
+        return dao.getAllRemotes()
     }
 
 }

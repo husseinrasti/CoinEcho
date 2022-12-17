@@ -17,9 +17,11 @@
 package com.husseinrasti.data.remoteKeys.entity
 
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import org.jetbrains.annotations.NotNull
 
 
 /**
@@ -28,6 +30,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "remote_keys")
 data class RemoteKeysEntity(
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "type")
     val type: String,
     @ColumnInfo(name = "prev_key")

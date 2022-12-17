@@ -17,11 +17,13 @@
 package com.husseinrasti.data.market.repository
 
 import android.content.res.Resources
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import androidx.lifecycle.flowWithLifecycle
+import androidx.paging.*
 import com.husseinrasti.core.model.NETWORK_PAGE_SIZE
+import com.husseinrasti.data.coin.dao.CoinDao
+import com.husseinrasti.data.coin.datasource.CoinDataSource
 import com.husseinrasti.data.market.datasource.MarketPagingSource
+import com.husseinrasti.data.market.remoteMediator.MarketRemoteMediator
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.domain.market.repository.MarketRepository
@@ -34,22 +36,26 @@ import javax.inject.Inject
  */
 class MarketRepositoryImpl @Inject constructor(
     private val resources: Resources,
-    private val pagingSource: MarketPagingSource
+    private val pagingSource: MarketPagingSource,
+    private val remoteMediator: MarketRemoteMediator,
+    private val coinDataSource: CoinDataSource
 ) : MarketRepository {
 
+    @OptIn(ExperimentalPagingApi::class)
     override suspend fun getMarkets(body: MarketEntity.Body): Flow<PagingData<CoinEntity.Item>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = {
-                pagingSource.apply {
-                    category = body.category
-                    currency = body.currency
-                    order = body.order
-                    sparkline = body.sparkline
-                }
+            remoteMediator = remoteMediator,
+            pagingSourceFactory = { coinDataSource.getCoin()
+//                pagingSource.apply {
+//                    category = body.category
+//                    currency = body.currency
+//                    order = body.order
+//                    sparkline = body.sparkline
+//                }
             }
         ).flow
     }

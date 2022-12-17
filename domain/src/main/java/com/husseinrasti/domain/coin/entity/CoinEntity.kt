@@ -70,7 +70,8 @@ class CoinEntity {
         @ColumnInfo(name = "total_volume")
         val totalVolume: Double,
         @ColumnInfo(name = "sparkline_in_7d")
-        val sparklineIn7d: List<Double>
+        val sparklineIn7d: List<Double>,
+
     )
 
 }

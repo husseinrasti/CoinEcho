@@ -21,6 +21,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.husseinrasti.coinecho.cache.converter.ListTypeConverter
 import com.husseinrasti.data.coin.dao.CoinDao
+import com.husseinrasti.data.remoteKeys.dao.RemoteKeysDao
+import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
 import com.husseinrasti.domain.coin.entity.CoinEntity
 
 
@@ -32,7 +34,7 @@ import com.husseinrasti.domain.coin.entity.CoinEntity
  * below annotation is database version and the tables
  */
 @Database(
-    entities = [CoinEntity.Item::class],
+    entities = [CoinEntity.Item::class,RemoteKeysEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -49,5 +51,6 @@ abstract class AppDatabase : RoomDatabase() {
      */
 
     abstract fun coinDao(): CoinDao
+    abstract fun remotekeyDao(): RemoteKeysDao
 
 }

@@ -17,6 +17,8 @@
 package com.husseinrasti.data.coin.dao
 
 
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -35,12 +37,18 @@ interface CoinDao {
     suspend fun insert(entity: CoinEntity.Item)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(list: List<CoinEntity.Item>)
+    suspend fun insert(list: List<CoinEntity.Item>?)
 
     @Query("SELECT * FROM tbl_coin WHERE id=:id")
     fun select(id: String): Flow<CoinEntity.Item>
 
     @Query("SELECT * FROM tbl_coin")
     fun select(): Flow<List<CoinEntity.Item>>
+
+    @Query("DELETE FROM tbl_coin")
+    suspend fun clearAll()
+
+    @Query("SELECT * FROM tbl_coin")
+     fun getCoin():PagingSource<Int,CoinEntity.Item>
 
 }

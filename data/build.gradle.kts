@@ -24,4 +24,7 @@ dependencies {
     implementation(project(BuildModules.Core.NETWORK))
     implementation(project(BuildModules.Core.MODEL))
     implementation(project(BuildModules.DOMAIN))
+    implementation(project(BuildModules.COMPONENTS))
+
+
 }

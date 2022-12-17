@@ -18,6 +18,7 @@ package com.husseinrasti.coinecho.di
 
 import com.husseinrasti.coinecho.cache.AppDatabase
 import com.husseinrasti.data.coin.dao.CoinDao
+import com.husseinrasti.data.remoteKeys.dao.RemoteKeysDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,6 +37,12 @@ class DaoModule {
     @ViewModelScoped
     fun coinDao(appDatabase: AppDatabase): CoinDao {
         return appDatabase.coinDao()
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun remoteKeyDao(appDatabase: AppDatabase): RemoteKeysDao {
+        return appDatabase.remotekeyDao()
     }
 
 }

@@ -37,8 +37,8 @@ object BuildDependenciesVersions {
     const val daggerHilt = "2.42"
     const val rxJava = "3.0.0"
     const val rxBinding = "2.0.0"
-    const val room = "2.3.0"
-    const val paging = "3.0.1"
+    const val room = "2.4.3"
+    const val paging = "3.1.1"
     const val navigation = "2.3.5"
 
     const val browser = "1.2.0"

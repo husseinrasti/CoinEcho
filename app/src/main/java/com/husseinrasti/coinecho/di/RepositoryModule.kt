@@ -17,8 +17,15 @@
 package com.husseinrasti.coinecho.di
 
 import android.content.res.Resources
+import com.husseinrasti.coinecho.App
+import com.husseinrasti.coinecho.cache.AppDatabase
+import com.husseinrasti.data.coin.dao.CoinDao
+import com.husseinrasti.data.coin.datasource.CoinDataSource
 import com.husseinrasti.data.market.datasource.MarketPagingSource
+import com.husseinrasti.data.market.remote.MarketApi
+import com.husseinrasti.data.market.remoteMediator.MarketRemoteMediator
 import com.husseinrasti.data.market.repository.MarketRepositoryImpl
+import com.husseinrasti.data.remoteKeys.datasource.RemoteKeysDataSource
 import com.husseinrasti.domain.market.repository.MarketRepository
 import dagger.Module
 import dagger.Provides
@@ -36,10 +43,23 @@ class RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun provideMarketRepository(resources: Resources, pagingSource: MarketPagingSource): MarketRepository {
+    fun provideMarketRepository(resources: Resources, pagingSource: MarketPagingSource,remoteMediator:MarketRemoteMediator,coinDataSource: CoinDataSource): MarketRepository {
         return MarketRepositoryImpl(
             resources = resources,
-            pagingSource = pagingSource
+            pagingSource = pagingSource,
+            remoteMediator=remoteMediator,
+            coinDataSource = coinDataSource
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideMarketRemoteMediator(coinDataSource: CoinDataSource, remoteKeyDAO:RemoteKeysDataSource,marketApi:MarketApi,database:AppDatabase): MarketRemoteMediator {
+        return MarketRemoteMediator(
+           coinDAO = coinDataSource,
+            remoteKeyDAO=remoteKeyDAO,
+            marketInterface =marketApi,
+            db = database
         )
     }
 

@@ -41,6 +41,7 @@ fun DependencyHandler.addJetpackDependencies() {
     implementation(Dependencies.navigationUi)
     implementation(Dependencies.roomKtx)
     implementation(Dependencies.roomRuntime)
+    implementation(Dependencies.roomPaging)
     kapt(AnnotationProcessing.roomCompiler)
     implementation(DaggerHilt.daggerHilt)
     kapt(DaggerHilt.daggerHiltCompiler)

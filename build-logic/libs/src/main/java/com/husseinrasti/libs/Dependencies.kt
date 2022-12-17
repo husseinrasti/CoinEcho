@@ -54,6 +54,7 @@ object Dependencies {
     const val roomRuntime = "androidx.room:room-runtime:${BuildDependenciesVersions.room}"
     const val roomKtx = "androidx.room:room-ktx:${BuildDependenciesVersions.room}"
     const val roomRxJava = "androidx.room:room-rxjava3:${BuildDependenciesVersions.room}"
+    const val roomPaging="androidx.room:room-paging:${BuildDependenciesVersions.room}"
 
     const val paging = "androidx.paging:paging-runtime-ktx:${BuildDependenciesVersions.paging}"
     const val rxPaging = "androidx.paging:paging-rxjava3:${BuildDependenciesVersions.paging}"

@@ -16,6 +16,7 @@
 
 package com.husseinrasti.data.coin.datasource
 
+import androidx.paging.PagingSource
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import kotlinx.coroutines.flow.Flow
@@ -33,7 +34,7 @@ class CoinDataSource @Inject constructor(
         dao.insert(entity)
     }
 
-    suspend fun insertList(list: List<CoinEntity.Item>) {
+    suspend fun insertList(list: List<CoinEntity.Item>?) {
         dao.insert(list)
     }
 
@@ -43,6 +44,14 @@ class CoinDataSource @Inject constructor(
 
     fun select(): Flow<List<CoinEntity.Item>> {
         return dao.select()
+    }
+
+    suspend fun deleteAll() {
+        return dao.clearAll()
+    }
+
+    fun getCoin():PagingSource<Int, CoinEntity.Item>{
+        return dao.getCoin()
     }
 
 }
