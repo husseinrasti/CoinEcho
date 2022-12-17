@@ -19,6 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/activity_startup"
     tools:context=".startup.StartupActivity">
 
     <androidx.fragment.app.FragmentContainerView

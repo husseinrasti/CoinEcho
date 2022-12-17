@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_detail"
+    app:startDestination="@id/detailFragment">
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.husseinrasti.detail_page.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+    <deepLink
+        android:autoVerify="true"
+        app:uri="myapp://detail" />
+       <!-- <argument
+            android:name="nameOfCoin"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="currentPrice"
+            app:argType="Double"
+            android:defaultValue="0" />-->
+    </fragment>
+
+</navigation>

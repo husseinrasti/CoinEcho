@@ -18,11 +18,16 @@ package com.husseinrasti.coinecho.startup
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.Navigator
 import com.husseinrasti.coinecho.databinding.ActivityStartupBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class StartupActivity : AppCompatActivity() {
+
+   /* XInjectionManager.bindComponentToCustomLifecycle(object : IHasComponent<Navigator> {
+        override fun getComponent(): Navigator = Navigator()
+    })*/
 
     private lateinit var binding: ActivityStartupBinding
 
@@ -31,5 +36,4 @@ class StartupActivity : AppCompatActivity() {
         binding = ActivityStartupBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
-
 }

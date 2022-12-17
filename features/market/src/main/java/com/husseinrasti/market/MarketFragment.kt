@@ -21,18 +21,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.husseinrasti.core.model.Failure
 import com.husseinrasti.core.model.toFailure
 import com.husseinrasti.core.extensions.visibility
+import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.market.databinding.FragmentMarketBinding
+import dagger.Module
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -49,6 +55,7 @@ class MarketFragment : Fragment() {
     private var _binding: FragmentMarketBinding? = null
     private val binding get() = _binding!!
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleScope.launchWhenStarted {
@@ -56,7 +63,11 @@ class MarketFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentMarketBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -68,11 +79,44 @@ class MarketFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MarketAdapter()
+
+        val clickListener: (CoinEntity.Item) -> Unit = { coin ->
+            Toast.makeText(context, "coin id $coin", Toast.LENGTH_SHORT).show()
+
+            /*val bundle = Bundle()
+            bundle.putString("nameOfCoin", coin.name)*/
+           /* val request = NavDeepLinkRequest.Builder
+                .fromUri("myapp://detail".toUri())
+                .build()
+            view.findNavController().navigate(request)*/
+          /*  Navigation.findNavController(view).navigate(bundle)*/
+        }
+
+        adapter = MarketAdapter(clickListener)
+
+        adapter.clickListener = {
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("myapp://detail".toUri())
+                .build()
+            view.findNavController().navigate(request)
+        }
+        adapter.clickListener2 = {
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("myapp://detail".toUri())
+                .build()
+            view.findNavController().navigate(request)
+        }
+
         adapter.addLoadStateListener { adapterLoadingErrorHandling(it) }
         adapter.withLoadStateFooter(LoadingStateAdapter { adapter.retry() })
         binding.recycler.adapter = adapter
-        binding.recycler.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+        binding.recycler.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
+
         onSetupViewModel()
     }
 

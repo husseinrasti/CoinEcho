@@ -108,4 +108,6 @@ object BuildDependenciesVersions {
     const val crashlyticsGradle = "2.8.1"
     const val fabricIo = "1.31.2"
 
+    const val componentManager = "2.0.0"
+
 }

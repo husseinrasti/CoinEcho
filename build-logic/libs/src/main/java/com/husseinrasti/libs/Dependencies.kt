@@ -91,4 +91,7 @@ object Dependencies {
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${BuildDependenciesVersions.coroutinesVersion}"
     const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${BuildDependenciesVersions.coroutinesAndroid}"
     const val retrofitCoroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${BuildDependenciesVersions.coroutinesRetrofit}"
+
+    // Components Manager
+    const val componentManager = "com.github.valeryponomarenko.componentsmanager:androidx:${BuildDependenciesVersions.componentManager}"
 }

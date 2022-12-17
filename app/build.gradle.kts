@@ -116,5 +116,7 @@ dependencies {
     implementation(project(BuildModules.Core.NETWORK))
     implementation(project(BuildModules.DOMAIN))
     implementation(project(BuildModules.DATA))
-    implementation(project(BuildModules.Features.MARKET))
+    api(project(BuildModules.Features.MARKET))
+    api(project(BuildModules.Features.DETAIL))
+
 }

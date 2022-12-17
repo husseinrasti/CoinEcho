@@ -14,18 +14,10 @@
   ~ limitations under the License.
   -->
 
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_navigation"
-    app:startDestination="@id/navigation_market">
-
-
-    <include
-        app:graph = "@navigation/navigation_market" />
-
-    <include
-        app:graph = "@navigation/navigation_detail"/>
-
-
-</navigation>
+<resources>
+    <string name="btn_retry">Retry</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nameofcoin">nameOfCoin</string>
+    <string name="current_price">current price</string>
+</resources>

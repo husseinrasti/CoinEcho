@@ -17,14 +17,21 @@
 package com.husseinrasti.market
 
 import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.net.toUri
+import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.husseinrasti.core.extensions.formatPrice
 import com.husseinrasti.core.extensions.load
 import com.husseinrasti.core.extensions.toDollar
 import com.husseinrasti.core.extensions.toPercent
@@ -35,9 +42,12 @@ import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 /**
  * Created by Hussein Rasti on 2/24/22.
  */
-class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
+class MarketAdapter(var clickListener : ((CoinEntity.Item) -> Unit)?, var test: String? = null): PagingDataAdapter<CoinEntity.Item,
+        MarketAdapter.ViewHolder>(DiffUtilMarket()) {
 
     private lateinit var _context: Context
+
+    var clickListener2: ((String) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         _context = parent.context
@@ -69,8 +79,16 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
             )
             binding.marketCap.text = coin.marketCap.toDollar().split(".")[0]
             binding.logo.load(coin.image)
-        }
 
+            binding.name.setOnClickListener {
+                clickListener?.invoke(coin)
+                Log.d("CLICK", "Listener works")
+            }
+
+            binding.rank.setOnClickListener {
+                clickListener2?.invoke(coin.id)
+            }
+        }
     }
 
 
