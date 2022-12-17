@@ -21,9 +21,6 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.jetbrains.annotations.NotNull
-
-
 /**
  * Created by Hussein Rasti on 2/23/22.
  */

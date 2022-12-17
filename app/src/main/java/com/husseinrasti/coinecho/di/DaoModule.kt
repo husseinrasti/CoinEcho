@@ -17,6 +17,7 @@
 package com.husseinrasti.coinecho.di
 
 import com.husseinrasti.coinecho.cache.AppDatabase
+import com.husseinrasti.data.bookmarkcoin.dao.BookMarkCoinDao
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.data.remoteKeys.dao.RemoteKeysDao
 import dagger.Module
@@ -43,6 +44,12 @@ class DaoModule {
     @ViewModelScoped
     fun remoteKeyDao(appDatabase: AppDatabase): RemoteKeysDao {
         return appDatabase.remotekeyDao()
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun bookMarkCoinDao(appDatabase: AppDatabase): BookMarkCoinDao {
+        return appDatabase.BookMarkCoinDao()
     }
 
 }

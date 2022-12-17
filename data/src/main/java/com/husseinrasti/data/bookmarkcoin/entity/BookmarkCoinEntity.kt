@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "bookmark_coin")
-data class bookmarkCoinEntity(
+data class BookmarkCoinEntity(
     @PrimaryKey(autoGenerate = false)
     @NonNull
     @ColumnInfo(name = "id")

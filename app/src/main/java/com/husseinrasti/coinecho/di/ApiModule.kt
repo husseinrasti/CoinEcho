@@ -37,5 +37,4 @@ class ApiModule {
     fun provideMarket(retrofit: Retrofit): MarketApi {
         return retrofit.create(MarketApi::class.java)
     }
-
 }
