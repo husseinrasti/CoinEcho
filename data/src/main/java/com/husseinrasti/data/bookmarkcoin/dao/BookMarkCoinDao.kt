@@ -3,9 +3,8 @@ package com.husseinrasti.data.bookmarkcoin.dao
 import androidx.room.*
 import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
 
-class BookMarkCoinDao {
     @Dao
-    interface RemoteKeysDao {
+    interface BookMarkCoinDao {
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         suspend fun insertBookMarkId(id:String)
@@ -19,4 +18,3 @@ class BookMarkCoinDao {
         @Query("SELECT * FROM bookmark_coin WHERE id = :id")
         suspend fun selectBookMarkId(id: String): RemoteKeysEntity?
     }
-}
