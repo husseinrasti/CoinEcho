@@ -74,6 +74,9 @@ class MarketFragment : Fragment() {
         binding.recycler.adapter = adapter
         binding.recycler.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         onSetupViewModel()
+        adapter.OnBookMarkClick={
+            viewModel.addBookMark(it)
+        }
     }
 
     private fun onSetupViewModel() {

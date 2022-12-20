@@ -23,13 +23,16 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.husseinrasti.core.model.Failure
+import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
+import com.husseinrasti.domain.market.usecase.BookMarkUseCase
 import com.husseinrasti.domain.market.usecase.GetMarketsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -38,7 +41,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class MarketViewModel @Inject constructor(
-    private val getMarketsUseCase: GetMarketsUseCase
+    private val getMarketsUseCase: GetMarketsUseCase,
+    private val bookMarkUseCase: BookMarkUseCase
 ) : ViewModel() {
 
     private val _error = MutableLiveData<Failure>()
@@ -68,6 +72,12 @@ class MarketViewModel @Inject constructor(
                 onLoading(false)
                 _markets.postValue(it)
             }
+    }
+
+     fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity){
+        viewModelScope.launch {
+            bookMarkUseCase.addBookMark(bookmarkCoinEntity)
+        }
     }
 
 }

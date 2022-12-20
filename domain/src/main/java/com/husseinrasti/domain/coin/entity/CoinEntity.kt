@@ -19,6 +19,7 @@ package com.husseinrasti.domain.coin.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 
 
 /**
@@ -73,6 +74,12 @@ class CoinEntity {
         val sparklineIn7d: List<Double>,
         @ColumnInfo(name = "bookmarked")
         val bookmarked: Boolean = false
-    )
+    ) {
+
+        fun toBookMarkEntity(id: String): BookmarkCoinEntity {
+            return BookmarkCoinEntity(id = id)
+        }
+    }
+
 
 }

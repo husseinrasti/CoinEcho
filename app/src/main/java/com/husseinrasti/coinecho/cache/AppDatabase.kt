@@ -21,7 +21,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.husseinrasti.coinecho.cache.converter.ListTypeConverter
 import com.husseinrasti.data.bookmarkcoin.dao.BookMarkCoinDao
-import com.husseinrasti.data.bookmarkcoin.entity.BookmarkCoinEntity
+import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.data.remoteKeys.dao.RemoteKeysDao
 import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
@@ -36,7 +36,7 @@ import com.husseinrasti.domain.coin.entity.CoinEntity
  * below annotation is database version and the tables
  */
 @Database(
-    entities = [CoinEntity.Item::class,RemoteKeysEntity::class,BookmarkCoinEntity::class],
+    entities = [CoinEntity.Item::class,RemoteKeysEntity::class, BookmarkCoinEntity::class],
     version = 1,
     exportSchema = false
 )

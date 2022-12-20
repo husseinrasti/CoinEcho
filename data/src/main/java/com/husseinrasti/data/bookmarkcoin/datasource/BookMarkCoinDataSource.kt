@@ -1,12 +1,7 @@
 package com.husseinrasti.data.bookmarkcoin.datasource
 
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.husseinrasti.data.bookmarkcoin.dao.BookMarkCoinDao
-import com.husseinrasti.data.bookmarkcoin.entity.BookmarkCoinEntity
-import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
+import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import javax.inject.Inject
 
 class BookMarkCoinDataSource @Inject constructor(private val dao:BookMarkCoinDao) {
@@ -15,8 +10,8 @@ class BookMarkCoinDataSource @Inject constructor(private val dao:BookMarkCoinDao
         dao.insertBookMarkId(bookmarkCoinEntity)
     }
 
-    suspend fun delete(bookmarkCoinEntity: BookmarkCoinEntity){
-        dao.delete(bookmarkCoinEntity)
+    suspend fun delete(id:String){
+        dao.delete(id)
     }
 
     suspend fun deleteAllBookmarks(){
@@ -25,5 +20,9 @@ class BookMarkCoinDataSource @Inject constructor(private val dao:BookMarkCoinDao
 
     suspend fun selectBookMarkId(id: String): String?{
        return dao.selectBookMarkId(id)
+    }
+
+    suspend fun selectAllBookMarksIds():List<String>{
+        return dao.selectAllBookMarksIds()
     }
 }

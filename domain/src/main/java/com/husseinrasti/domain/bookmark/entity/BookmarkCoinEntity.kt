@@ -1,4 +1,4 @@
-package com.husseinrasti.data.bookmarkcoin.entity
+package com.husseinrasti.domain.bookmark.entity
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

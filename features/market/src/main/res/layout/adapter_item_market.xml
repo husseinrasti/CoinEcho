@@ -23,11 +23,25 @@
     android:layout_marginBottom="4dp"
     android:padding="4dp">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bookmark"
+        android:layout_width="19dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bookmark1"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rank"
+        app:layout_constraintVertical_bias="1.0" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/rank"
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
+        android:layout_marginStart="12dp"
         android:gravity="center"
         app:autoSizeMaxTextSize="16sp"
         app:autoSizeMinTextSize="10sp"
@@ -35,6 +49,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.114"
         tools:text="1" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -52,6 +67,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             tools:src="@tools:sample/avatars" />
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/name"
@@ -85,6 +101,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/us_zipcodes" />
 
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/marketCap"
         android:layout_width="wrap_content"
@@ -94,5 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/us_zipcodes" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

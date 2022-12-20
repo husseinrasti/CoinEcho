@@ -19,14 +19,18 @@ package com.husseinrasti.coinecho.di
 import android.content.res.Resources
 import com.husseinrasti.coinecho.App
 import com.husseinrasti.coinecho.cache.AppDatabase
+import com.husseinrasti.data.bookmarkcoin.datasource.BookMarkCoinDataSource
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.data.coin.datasource.CoinDataSource
 import com.husseinrasti.data.market.datasource.MarketPagingSource
 import com.husseinrasti.data.market.remote.MarketApi
 import com.husseinrasti.data.market.remoteMediator.MarketRemoteMediator
+import com.husseinrasti.data.market.repository.BookMarkRepositoryImpl
 import com.husseinrasti.data.market.repository.MarketRepositoryImpl
 import com.husseinrasti.data.remoteKeys.datasource.RemoteKeysDataSource
+import com.husseinrasti.domain.market.repository.BookMarkRepository
 import com.husseinrasti.domain.market.repository.MarketRepository
+import com.husseinrasti.domain.market.usecase.BookMarkUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,6 +64,22 @@ class RepositoryModule {
             remoteKeyDAO=remoteKeyDAO,
             marketInterface =marketApi,
             db = database
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideBookMarkRepository(bookMarkCoinDataSource: BookMarkCoinDataSource): BookMarkRepositoryImpl {
+        return BookMarkRepositoryImpl(
+       bookMarkDao = bookMarkCoinDataSource
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideBookMarkUseCase(bookMarkRepository: BookMarkRepositoryImpl): BookMarkUseCase {
+        return BookMarkUseCase(
+           bookMarkRepository = bookMarkRepository
         )
     }
 

@@ -19,15 +19,16 @@ package com.husseinrasti.market
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.husseinrasti.core.extensions.formatPrice
 import com.husseinrasti.core.extensions.load
 import com.husseinrasti.core.extensions.toDollar
 import com.husseinrasti.core.extensions.toPercent
+import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 
@@ -38,6 +39,8 @@ import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
 
     private lateinit var _context: Context
+    var OnBookMarkClick :((BookmarkCoinEntity) -> Unit)? =null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         _context = parent.context
@@ -50,10 +53,10 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
         getItem(position)?.let { holder.bind(it) }
     }
 
-
     inner class ViewHolder(
         private val binding: AdapterItemMarketBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+        private var bookMarked=false
 
         @SuppressLint("SetTextI18n")
         fun bind(coin: CoinEntity.Item) {
@@ -62,6 +65,17 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
             binding.price.text = coin.currentPrice.toDollar()
             val percent = coin.priceChangePercentage24h.toPercent()
             binding.percent.text = percent
+            binding.bookmark.setOnClickListener(View.OnClickListener {
+                if(!bookMarked){
+                    binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark2))
+
+                    bookMarked=true
+                }else{
+                    binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark1))
+                    bookMarked=false
+                }
+                OnBookMarkClick?.invoke(coin.toBookMarkEntity(coin.id))
+            })
             binding.percent.setTextColor(
                 ContextCompat.getColor(
                     _context, if (percent.contains("-")) R.color.red else R.color.green
@@ -70,9 +84,7 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
             binding.marketCap.text = coin.marketCap.toDollar().split(".")[0]
             binding.logo.load(coin.image)
         }
-
     }
-
 
     private class DiffUtilMarket : DiffUtil.ItemCallback<CoinEntity.Item>() {
         override fun areItemsTheSame(oldItem: CoinEntity.Item, newItem: CoinEntity.Item): Boolean {
@@ -82,7 +94,5 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
         override fun areContentsTheSame(oldItem: CoinEntity.Item, newItem: CoinEntity.Item): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
-
 }
