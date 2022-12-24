@@ -36,11 +36,10 @@ import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 /**
  * Created by Hussein Rasti on 2/24/22.
  */
-class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
+class MarketAdapter (var OnBookMarkClick :(BookmarkCoinEntity,Int) -> Unit): PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
 
     private lateinit var _context: Context
-    var OnBookMarkClick :((BookmarkCoinEntity) -> Unit)? =null
-
+   // var OnBookMarkClick :((BookmarkCoinEntity,Int) -> Unit)? =null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         _context = parent.context
@@ -56,7 +55,7 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
     inner class ViewHolder(
         private val binding: AdapterItemMarketBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        private var bookMarked=false
+        private var bookMarked=0
 
         @SuppressLint("SetTextI18n")
         fun bind(coin: CoinEntity.Item) {
@@ -66,15 +65,15 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
             val percent = coin.priceChangePercentage24h.toPercent()
             binding.percent.text = percent
             binding.bookmark.setOnClickListener(View.OnClickListener {
-                if(!bookMarked){
+                if(bookMarked==0){
                     binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark2))
-
-                    bookMarked=true
+                    bookMarked=1
                 }else{
                     binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark1))
-                    bookMarked=false
+                    bookMarked=0
                 }
-                OnBookMarkClick?.invoke(coin.toBookMarkEntity(coin.id))
+                OnBookMarkClick?.invoke(coin.toBookMarkEntity(coin.id),bookMarked)
+
             })
             binding.percent.setTextColor(
                 ContextCompat.getColor(
@@ -83,6 +82,13 @@ class MarketAdapter : PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolde
             )
             binding.marketCap.text = coin.marketCap.toDollar().split(".")[0]
             binding.logo.load(coin.image)
+            if(coin.bookmarked){
+                binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark2))
+                bookMarked=1
+            }else{
+                binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark1))
+                bookMarked=0
+            }
         }
     }
 

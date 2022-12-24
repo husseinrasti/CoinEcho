@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.paging.*
 import androidx.room.RoomDatabase
 import androidx.room.withTransaction
+import com.husseinrasti.data.bookmarkcoin.datasource.BookMarkCoinDataSource
 import com.husseinrasti.data.coin.datasource.CoinDataSource
 import com.husseinrasti.data.market.remote.MarketApi
 import com.husseinrasti.data.remoteKeys.datasource.RemoteKeysDataSource
@@ -20,6 +21,7 @@ class MarketRemoteMediator @Inject constructor(
     private val remoteKeyDAO: RemoteKeysDataSource,
     private val marketInterface: MarketApi,
     private val db: RoomDatabase,
+    private val bookMarkDao:BookMarkCoinDataSource
     ) : RemoteMediator<Int, CoinEntity.Item>() {
 
     private val initialPage: Int = 1
@@ -30,6 +32,7 @@ class MarketRemoteMediator @Inject constructor(
     ): MediatorResult {
 
         return try {
+
             val currentPage = when (loadType) {
                 LoadType.REFRESH -> {
                     val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -65,6 +68,7 @@ class MarketRemoteMediator @Inject constructor(
 
                 db.withTransaction {
                     if (loadType == LoadType.REFRESH) {
+
                         remoteKeyDAO.deleteAllRemoteKeys()
                         coinDAO.deleteAll()
                     }
@@ -78,6 +82,7 @@ class MarketRemoteMediator @Inject constructor(
                             nextKey = nextPage
                         )
                     }
+                    setBookMarks(data)
                     remoteKeyDAO.insertKeys(keys)
                     coinDAO.insertList(data)
                 }
@@ -112,5 +117,18 @@ class MarketRemoteMediator @Inject constructor(
                remoteKeyDAO.getRemoteKey(repo.id)
             }
     }
+    private suspend fun setBookMarks(list:List<CoinEntity.Item>){
+        var bookMarkList =bookMarkDao.selectAllBookMarksIds()
+        list.map { coinEntity->
+            bookMarkList.map {  bookmarkId->
+
+                if(coinEntity.id.equals(bookmarkId)){
+                    coinEntity.bookmarked=true
+                }
+            }
+        }
+    }
+
+
 
 }

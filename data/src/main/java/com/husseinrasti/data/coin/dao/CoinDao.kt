@@ -46,4 +46,10 @@ interface CoinDao {
 
     @Query("SELECT * FROM tbl_coin")
      fun getCoin():PagingSource<Int,CoinEntity.Item>
+
+    @Query("SELECT * FROM tbl_coin")
+    fun getAllCoins():List<CoinEntity.Item>
+
+    @Query("update tbl_coin set bookmarked = :bookMarkState where id = :id ")
+    suspend fun updateBookMark(bookMarkState:Int,id: String)
 }

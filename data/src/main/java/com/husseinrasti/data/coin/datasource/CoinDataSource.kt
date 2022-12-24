@@ -41,4 +41,13 @@ class CoinDataSource @Inject constructor(
     fun getCoin():PagingSource<Int, CoinEntity.Item>{
         return dao.getCoin()
     }
+
+    fun getAllCoins():List<CoinEntity.Item> {
+        return dao.getAllCoins()
+    }
+
+       suspend fun updateBookMark(bookMarkState:Int,id:String){
+            dao.updateBookMark(bookMarkState,id)
+    }
+
 }

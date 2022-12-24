@@ -31,6 +31,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.husseinrasti.core.model.Failure
 import com.husseinrasti.core.model.toFailure
 import com.husseinrasti.core.extensions.visibility
+import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
+import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
 import com.husseinrasti.market.databinding.FragmentMarketBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,17 +68,18 @@ class MarketFragment : Fragment() {
         _binding = null
     }
 
+    val OnBookMarkClickState:(BookmarkCoinEntity,Int)->Unit={ coin,state->
+        viewModel.addBookMark(coin,state)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MarketAdapter()
+        adapter = MarketAdapter(OnBookMarkClickState)
         adapter.addLoadStateListener { adapterLoadingErrorHandling(it) }
         adapter.withLoadStateFooter(LoadingStateAdapter { adapter.retry() })
         binding.recycler.adapter = adapter
         binding.recycler.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         onSetupViewModel()
-        adapter.OnBookMarkClick={
-            viewModel.addBookMark(it)
-        }
     }
 
     private fun onSetupViewModel() {

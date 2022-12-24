@@ -74,9 +74,9 @@ class MarketViewModel @Inject constructor(
             }
     }
 
-     fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity){
+     fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity,bookMarkState:Int){
         viewModelScope.launch {
-            bookMarkUseCase.addBookMark(bookmarkCoinEntity)
+            bookMarkUseCase.addBookMark(bookmarkCoinEntity,bookMarkState)
         }
     }
 

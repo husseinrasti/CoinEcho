@@ -73,7 +73,7 @@ class CoinEntity {
         @ColumnInfo(name = "sparkline_in_7d")
         val sparklineIn7d: List<Double>,
         @ColumnInfo(name = "bookmarked")
-        val bookmarked: Boolean = false
+        var bookmarked: Boolean = false
     ) {
 
         fun toBookMarkEntity(id: String): BookmarkCoinEntity {

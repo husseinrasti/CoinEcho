@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class BookMarkUseCase @Inject constructor(val bookMarkRepository: BookMarkRepository) {
 
-     suspend fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity){
-        bookMarkRepository.addBookMark(bookmarkCoinEntity)
+     suspend fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity,bookMarkState:Int){
+        bookMarkRepository.addBookMark(bookmarkCoinEntity,bookMarkState)
     }
 }

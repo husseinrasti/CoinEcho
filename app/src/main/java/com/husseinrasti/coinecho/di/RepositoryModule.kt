@@ -47,31 +47,34 @@ class RepositoryModule {
 
     @Provides
     @ViewModelScoped
-    fun provideMarketRepository(resources: Resources, pagingSource: MarketPagingSource,remoteMediator:MarketRemoteMediator,coinDataSource: CoinDataSource): MarketRepository {
+    fun provideMarketRepository(resources: Resources, pagingSource: MarketPagingSource,remoteMediator:MarketRemoteMediator,coinDataSource: CoinDataSource,bookMarkDataSource: BookMarkCoinDataSource): MarketRepository {
         return MarketRepositoryImpl(
             resources = resources,
             pagingSource = pagingSource,
             remoteMediator=remoteMediator,
-            coinDataSource = coinDataSource
+            coinDataSource = coinDataSource,
+            bookMarkDao = bookMarkDataSource
         )
     }
 
     @Provides
     @ViewModelScoped
-    fun provideMarketRemoteMediator(coinDataSource: CoinDataSource, remoteKeyDAO:RemoteKeysDataSource,marketApi:MarketApi,database:AppDatabase): MarketRemoteMediator {
+    fun provideMarketRemoteMediator(coinDataSource: CoinDataSource, remoteKeyDAO:RemoteKeysDataSource,marketApi:MarketApi,database:AppDatabase,bookMarkDataSource:BookMarkCoinDataSource): MarketRemoteMediator {
         return MarketRemoteMediator(
            coinDAO = coinDataSource,
             remoteKeyDAO=remoteKeyDAO,
             marketInterface =marketApi,
-            db = database
+            db = database,
+            bookMarkDao = bookMarkDataSource
         )
     }
 
     @Provides
     @ViewModelScoped
-    fun provideBookMarkRepository(bookMarkCoinDataSource: BookMarkCoinDataSource): BookMarkRepositoryImpl {
+    fun provideBookMarkRepository(bookMarkCoinDataSource: BookMarkCoinDataSource,coinDataSource: CoinDataSource): BookMarkRepositoryImpl {
         return BookMarkRepositoryImpl(
-       bookMarkDao = bookMarkCoinDataSource
+       bookMarkDao = bookMarkCoinDataSource,
+            coinDao = coinDataSource
         )
     }
 

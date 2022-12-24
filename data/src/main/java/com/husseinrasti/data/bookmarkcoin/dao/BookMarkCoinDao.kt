@@ -21,4 +21,5 @@ interface BookMarkCoinDao {
 
     @Query("SELECT id FROM bookmark_coin")
     suspend fun selectAllBookMarksIds():List<String>
+
 }

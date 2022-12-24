@@ -5,5 +5,5 @@ import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 
 
 interface BookMarkRepository {
-    suspend fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity)
+    suspend fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity,bookMarkState:Int)
 }
