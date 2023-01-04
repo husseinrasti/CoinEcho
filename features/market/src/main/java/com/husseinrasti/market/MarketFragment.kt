@@ -17,6 +17,7 @@
 package com.husseinrasti.market
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -78,31 +80,30 @@ class MarketFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val clickListener: (CoinEntity.Item) -> Unit = { coin ->
-            Toast.makeText(context, "coin id $coin", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "coin name ${coin.currentPrice}", Toast.LENGTH_SHORT).show()
 
-            /*val bundle = Bundle()
-            bundle.putString("nameOfCoin", coin.name)*/
-           /* val request = NavDeepLinkRequest.Builder
-                .fromUri("myapp://detail".toUri())
+            Log.d("Click","wooorks")
+
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("myApp://com.CoinEcho/detailFragment?nameOfCoin=${coin.name}&currentPrice=${coin.currentPrice}&marketCap=${coin.marketCap}&percent=${coin.marketCapChangePercentage24h}".toUri())
                 .build()
-            view.findNavController().navigate(request)*/
-          /*  Navigation.findNavController(view).navigate(bundle)*/
+            findNavController().navigate(request)
         }
 
         adapter = MarketAdapter(clickListener)
 
-        adapter.clickListener = {
+      /*  adapter.clickListener = {
             val request = NavDeepLinkRequest.Builder
-                .fromUri("myapp://detail".toUri())
+                .fromUri("android-app://CoinEcho/detailFragment?nameOfCoin=${coin.name}".toUri())
                 .build()
             view.findNavController().navigate(request)
         }
         adapter.clickListener2 = {
             val request = NavDeepLinkRequest.Builder
-                .fromUri("myapp://detail".toUri())
+                .fromUri("android-app://CoinEcho/detailFragment?nameOfCoin=${coin.name}".toUri())
                 .build()
             view.findNavController().navigate(request)
-        }
+        }*/
 
         adapter.addLoadStateListener { adapterLoadingErrorHandling(it) }
         adapter.withLoadStateFooter(LoadingStateAdapter { adapter.retry() })

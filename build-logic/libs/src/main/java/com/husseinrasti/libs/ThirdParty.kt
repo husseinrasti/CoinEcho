@@ -31,4 +31,6 @@ object ThirdParty {
     const val googleGson = "com.google.code.gson:gson:${BuildDependenciesVersions.gson}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${BuildDependenciesVersions.okHttp}"
     const val okHttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${BuildDependenciesVersions.okHttp}"
+
+
 }

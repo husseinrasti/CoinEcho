@@ -42,7 +42,7 @@ import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 /**
  * Created by Hussein Rasti on 2/24/22.
  */
-class MarketAdapter(var clickListener : ((CoinEntity.Item) -> Unit)?, var test: String? = null): PagingDataAdapter<CoinEntity.Item,
+class MarketAdapter(var clickListener : ((CoinEntity.Item) -> Unit)?): PagingDataAdapter<CoinEntity.Item,
         MarketAdapter.ViewHolder>(DiffUtilMarket()) {
 
     private lateinit var _context: Context

@@ -40,4 +40,5 @@ object BuildAndroidConfig {
 
     const val DATABASE_NAME = "CoinEcho.db"
     const val SHARED_PREF_NAME = "PrefCoinEcho"
+
 }

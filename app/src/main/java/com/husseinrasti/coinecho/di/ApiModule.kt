@@ -16,6 +16,7 @@
 
 package com.husseinrasti.coinecho.di
 
+import com.husseinrasti.data.detail.remote.DetailMarketApi
 import com.husseinrasti.data.market.remote.MarketApi
 import dagger.Module
 import dagger.Provides
@@ -36,6 +37,12 @@ class ApiModule {
     @Singleton
     fun provideMarket(retrofit: Retrofit): MarketApi {
         return retrofit.create(MarketApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDetail(retrofit: Retrofit): DetailMarketApi {
+        return retrofit.create(DetailMarketApi::class.java)
     }
 
 }

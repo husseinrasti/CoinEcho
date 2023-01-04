@@ -19,6 +19,8 @@ buildscript {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url = java.net.URI.create( "https://jitpack.io") }
+        maven { url = uri("https://jitpack.io") }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.4")
@@ -35,6 +37,7 @@ allprojects {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

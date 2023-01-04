@@ -55,6 +55,7 @@ class MarketViewModel @Inject constructor(
 
     private val _markets = MutableLiveData<PagingData<CoinEntity.Item>>()
     val markets: LiveData<PagingData<CoinEntity.Item>> = _markets
+
     suspend fun getMarkets(body: MarketEntity.Body) {
         onLoading(true)
         getMarketsUseCase(body)

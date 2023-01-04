@@ -16,6 +16,7 @@
 
 package com.husseinrasti.domain.coin.entity
 
+import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -28,7 +29,10 @@ import kotlinx.parcelize.Parcelize
  * Created by Hussein Rasti on 2/22/22.
  */
 
-class CoinEntity : java.io.Serializable{
+class CoinEntity() :Parcelable{
+    constructor(parcel: Parcel) : this() {
+    }
+
     @Parcelize
     @Entity(tableName = "tbl_coin")
     data class Item(
@@ -96,6 +100,23 @@ class CoinEntity : java.io.Serializable{
         @field:SerializedName("sparkline_in_7d")
         @ColumnInfo(name = "sparkline_in_7d")
         val sparklineIn7d: List<Double>
-    ) : Parcelable
+    ) :  Parcelable
 
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<CoinEntity> {
+        override fun createFromParcel(parcel: Parcel): CoinEntity {
+            return CoinEntity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<CoinEntity?> {
+            return arrayOfNulls(size)
+        }
+    }
 }

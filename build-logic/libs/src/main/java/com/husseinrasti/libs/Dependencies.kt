@@ -94,4 +94,6 @@ object Dependencies {
 
     // Components Manager
     const val componentManager = "com.github.valeryponomarenko.componentsmanager:androidx:${BuildDependenciesVersions.componentManager}"
+
+   // const val mpChart = "com.github.PhilJay:MPAndroidChart:${BuildDependenciesVersions.mpChart}"
 }

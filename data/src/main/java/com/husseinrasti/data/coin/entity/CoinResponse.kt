@@ -63,7 +63,7 @@ data class CoinResponse(
     val totalVolume: Double?,
     @SerializedName("sparkline_in_7d")
     val sparklineIn7d: Sparkline?
-) : ResponseObject<CoinEntity.Item> {
+) : ResponseObject<CoinEntity.Item> ,java.io.Serializable {
 
     data class Sparkline(
         @SerializedName("price")

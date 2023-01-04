@@ -12,15 +12,23 @@
         tools:layout="@layout/fragment_detail" >
     <deepLink
         android:autoVerify="true"
-        app:uri="myapp://detail" />
-       <!-- <argument
+        app:uri="myApp://com.CoinEcho/detailFragment?nameOfCoin={nameOfCoin}&amp;currentPrice={currentPrice}&amp;marketCap={marketCap}&amp;percent={percent}" />
+        <argument
             android:name="nameOfCoin"
             app:argType="string"
             app:nullable="true" />
         <argument
             android:name="currentPrice"
-            app:argType="Double"
-            android:defaultValue="0" />-->
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="marketCap"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="percent"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 </navigation>

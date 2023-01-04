@@ -110,4 +110,6 @@ object BuildDependenciesVersions {
 
     const val componentManager = "2.0.0"
 
+    const val mpChart = "v3.1.0"
+
 }

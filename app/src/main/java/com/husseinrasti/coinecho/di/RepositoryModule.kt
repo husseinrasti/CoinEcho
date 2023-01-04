@@ -17,8 +17,15 @@
 package com.husseinrasti.coinecho.di
 
 import android.content.res.Resources
+import androidx.lifecycle.ViewModel
+import com.husseinrasti.data.detail.remote.DetailMarketApi
+import com.husseinrasti.data.detail.repository.DetailRepositoryImpl
 import com.husseinrasti.data.market.datasource.MarketPagingSource
 import com.husseinrasti.data.market.repository.MarketRepositoryImpl
+import com.husseinrasti.detail_page.DetailViewModel
+import com.husseinrasti.domain.detail.repository.DetailRepository
+import com.husseinrasti.domain.detail.usecase.GetDetailUseCase
+import com.husseinrasti.domain.detail.usecase.GetDetailUseCaseImpl
 import com.husseinrasti.domain.market.repository.MarketRepository
 import dagger.Module
 import dagger.Provides
@@ -40,6 +47,30 @@ class RepositoryModule {
         return MarketRepositoryImpl(
             resources = resources,
             pagingSource = pagingSource
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideDetailRepository(api : DetailMarketApi): DetailRepository {
+        return DetailRepositoryImpl(
+           api = api
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideUseCaseDetail(detailRepository: DetailRepository): GetDetailUseCaseImpl {
+        return GetDetailUseCaseImpl(
+            repository = detailRepository
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideViewModel(getDetailUseCaseImpl: GetDetailUseCaseImpl): DetailViewModel {
+        return DetailViewModel(
+          getDetailUseCase = getDetailUseCaseImpl
         )
     }
 
