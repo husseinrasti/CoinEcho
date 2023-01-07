@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bookmark_graph"
+    app:startDestination="@id/bookMarkListFragment">
+
+    <fragment
+        android:id="@+id/bookMarkListFragment"
+        android:name="com.example.bookmark.BookMarkListFragment"
+        android:label="fragment_book_mark_list"
+        tools:layout="@layout/fragment_book_mark_list">
+        <deepLink
+            android:id="@+id/deepLink"
+            android:autoVerify="true"
+            app:uri="myApp://com.CoinEcho/BookMarkListFragment" />
+    </fragment>
+
+</navigation>

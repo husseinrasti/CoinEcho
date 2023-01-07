@@ -19,6 +19,7 @@ package com.husseinrasti.coinecho.di
 import android.content.res.Resources
 import com.husseinrasti.coinecho.App
 import com.husseinrasti.coinecho.cache.AppDatabase
+import com.husseinrasti.data.bookmark.repository.BookMarkPageRepositoryImpl
 import com.husseinrasti.data.bookmarkcoin.datasource.BookMarkCoinDataSource
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.data.coin.datasource.CoinDataSource
@@ -28,6 +29,8 @@ import com.husseinrasti.data.market.remoteMediator.MarketRemoteMediator
 import com.husseinrasti.data.market.repository.BookMarkRepositoryImpl
 import com.husseinrasti.data.market.repository.MarketRepositoryImpl
 import com.husseinrasti.data.remoteKeys.datasource.RemoteKeysDataSource
+import com.husseinrasti.domain.bookmark.repository.BookMarkPageRepository
+import com.husseinrasti.domain.bookmark.usecase.GetBookMarkUseCase
 import com.husseinrasti.domain.market.repository.BookMarkRepository
 import com.husseinrasti.domain.market.repository.MarketRepository
 import com.husseinrasti.domain.market.usecase.BookMarkUseCase
@@ -83,6 +86,23 @@ class RepositoryModule {
     fun provideBookMarkUseCase(bookMarkRepository: BookMarkRepositoryImpl): BookMarkUseCase {
         return BookMarkUseCase(
            bookMarkRepository = bookMarkRepository
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideBookMarkPageRepository(coinDataSource: CoinDataSource,bookMarkCoinDataSource: BookMarkCoinDataSource): BookMarkPageRepository {
+        return BookMarkPageRepositoryImpl(
+            coinDao = coinDataSource,
+            bookMarkDao = bookMarkCoinDataSource
+        )
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetBookMarkUseCase(bookMarkPageRepository: BookMarkPageRepository): GetBookMarkUseCase {
+        return GetBookMarkUseCase(
+            repository =bookMarkPageRepository
         )
     }
 

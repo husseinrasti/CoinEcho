@@ -16,10 +16,18 @@
 
 package com.husseinrasti.coinecho.startup
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
+import com.husseinrasti.coinecho.R
 import com.husseinrasti.coinecho.databinding.ActivityStartupBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.zip.Inflater
 
 @AndroidEntryPoint
 class StartupActivity : AppCompatActivity() {
@@ -30,6 +38,12 @@ class StartupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityStartupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.bookmark_menu,menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
 }

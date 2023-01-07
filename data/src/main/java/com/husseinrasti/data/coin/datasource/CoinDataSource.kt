@@ -34,6 +34,10 @@ class CoinDataSource @Inject constructor(
         dao.insert(list)
     }
 
+    suspend fun selectCoin(id:String) {
+        dao.select(id)
+    }
+
     suspend fun deleteAll() {
         return dao.clearAll()
     }
@@ -49,5 +53,10 @@ class CoinDataSource @Inject constructor(
        suspend fun updateBookMark(bookMarkState:Int,id:String){
             dao.updateBookMark(bookMarkState,id)
     }
+
+    fun selectSingleCoin(id:String):PagingSource<Int,CoinEntity.Item>{
+       return dao.selectSingleCoin(id)
+    }
+
 
 }

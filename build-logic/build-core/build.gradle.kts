@@ -46,6 +46,7 @@ dependencies {
 }
 
 
+
 gradlePlugin {
     plugins {
         create("core-plugin") {

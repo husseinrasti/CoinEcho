@@ -19,6 +19,7 @@ package com.husseinrasti.domain.coin.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.husseinrasti.domain.bookmark.entity.BookMarkEntity
 import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 
 
@@ -76,10 +77,30 @@ class CoinEntity {
         var bookmarked: Boolean = false
     ) {
 
-        fun toBookMarkEntity(id: String): BookmarkCoinEntity {
-            return BookmarkCoinEntity(id = id)
+        fun toBookMarkEntity(): BookMarkEntity {
+           return BookMarkEntity( id,
+               ath,
+               athChangePercentage,
+               athDate,
+               circulatingSupply,
+               currentPrice,
+               low24h,
+               high24h,
+               image,
+               marketCap,
+               marketCapChange24h,
+               marketCapChangePercentage24h,
+               marketCapRank,
+               maxSupply,
+               name,
+               priceChange24h,
+               priceChangePercentage24h,
+               symbol,
+               totalSupply,
+               totalVolume,
+               sparklineIn7d
+           )
         }
-    }
-
+        }
 
 }

@@ -25,6 +25,7 @@ import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import com.husseinrasti.data.coin.dao.CoinDao
 import com.husseinrasti.data.remoteKeys.dao.RemoteKeysDao
 import com.husseinrasti.data.remoteKeys.entity.RemoteKeysEntity
+import com.husseinrasti.domain.bookmark.entity.BookMarkEntity
 import com.husseinrasti.domain.coin.entity.CoinEntity
 
 
@@ -36,7 +37,7 @@ import com.husseinrasti.domain.coin.entity.CoinEntity
  * below annotation is database version and the tables
  */
 @Database(
-    entities = [CoinEntity.Item::class,RemoteKeysEntity::class, BookmarkCoinEntity::class],
+    entities = [CoinEntity.Item::class,RemoteKeysEntity::class, BookmarkCoinEntity::class,BookMarkEntity::class],
     version = 1,
     exportSchema = false
 )

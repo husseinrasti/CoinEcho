@@ -17,25 +17,28 @@
 package com.husseinrasti.market
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
+import com.husseinrasti.core.extensions.visibility
 import com.husseinrasti.core.model.Failure
 import com.husseinrasti.core.model.toFailure
-import com.husseinrasti.core.extensions.visibility
+import com.husseinrasti.domain.bookmark.entity.BookMarkEntity
 import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
-import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
+import com.husseinrasti.market.databinding.AdapterItemMarketBinding.inflate
 import com.husseinrasti.market.databinding.FragmentMarketBinding
+import com.husseinrasti.market.databinding.FragmentMarketBinding.inflate
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.zip.Inflater
 
 
 /**
@@ -51,8 +54,21 @@ class MarketFragment : Fragment() {
     private var _binding: FragmentMarketBinding? = null
     private val binding get() = _binding!!
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+         if(item.itemId==R.id.menu_bookmarks) {
+                val request = NavDeepLinkRequest.Builder
+            .fromUri("myApp://com.CoinEcho/BookMarkListFragment".toUri())
+            .build()
+            findNavController().navigate(request)
+             return true
+        }
+        return false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         lifecycleScope.launchWhenStarted {
             viewModel.getMarkets(MarketEntity.Body(currency = "usd"))
         }
@@ -68,7 +84,7 @@ class MarketFragment : Fragment() {
         _binding = null
     }
 
-    val OnBookMarkClickState:(BookmarkCoinEntity,Int)->Unit={ coin,state->
+    val OnBookMarkClickState:(BookMarkEntity,Int)->Unit={ coin,state->
         viewModel.addBookMark(coin,state)
     }
 
@@ -80,6 +96,8 @@ class MarketFragment : Fragment() {
         binding.recycler.adapter = adapter
         binding.recycler.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         onSetupViewModel()
+
+
     }
 
     private fun onSetupViewModel() {

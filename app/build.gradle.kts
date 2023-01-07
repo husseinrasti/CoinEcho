@@ -117,4 +117,5 @@ dependencies {
     implementation(project(BuildModules.DOMAIN))
     implementation(project(BuildModules.DATA))
     implementation(project(BuildModules.Features.MARKET))
+    implementation(project(BuildModules.Features.BOOKMARK))
 }

@@ -23,6 +23,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.husseinrasti.core.model.Failure
+import com.husseinrasti.domain.bookmark.entity.BookMarkEntity
 import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.domain.market.entity.MarketEntity
@@ -74,9 +75,9 @@ class MarketViewModel @Inject constructor(
             }
     }
 
-     fun addBookMark(bookmarkCoinEntity: BookmarkCoinEntity,bookMarkState:Int){
+     fun addBookMark(bookmarkEntity: BookMarkEntity,bookMarkState:Int){
         viewModelScope.launch {
-            bookMarkUseCase.addBookMark(bookmarkCoinEntity,bookMarkState)
+            bookMarkUseCase.addBookMark(bookmarkEntity,bookMarkState)
         }
     }
 

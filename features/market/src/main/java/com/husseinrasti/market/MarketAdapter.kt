@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.husseinrasti.core.extensions.load
 import com.husseinrasti.core.extensions.toDollar
 import com.husseinrasti.core.extensions.toPercent
+import com.husseinrasti.domain.bookmark.entity.BookMarkEntity
 import com.husseinrasti.domain.bookmark.entity.BookmarkCoinEntity
 import com.husseinrasti.domain.coin.entity.CoinEntity
 import com.husseinrasti.market.databinding.AdapterItemMarketBinding
@@ -36,10 +37,9 @@ import com.husseinrasti.market.databinding.AdapterItemMarketBinding
 /**
  * Created by Hussein Rasti on 2/24/22.
  */
-class MarketAdapter (var OnBookMarkClick :(BookmarkCoinEntity,Int) -> Unit): PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
+class MarketAdapter (var OnBookMarkClick :(BookMarkEntity,Int) -> Unit): PagingDataAdapter<CoinEntity.Item, MarketAdapter.ViewHolder>(DiffUtilMarket()) {
 
     private lateinit var _context: Context
-   // var OnBookMarkClick :((BookmarkCoinEntity,Int) -> Unit)? =null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         _context = parent.context
@@ -72,7 +72,7 @@ class MarketAdapter (var OnBookMarkClick :(BookmarkCoinEntity,Int) -> Unit): Pag
                     binding.bookmark.setBackgroundDrawable(_context.resources.getDrawable(R.drawable.bookmark1))
                     bookMarked=0
                 }
-                OnBookMarkClick?.invoke(coin.toBookMarkEntity(coin.id),bookMarked)
+                OnBookMarkClick?.invoke(coin.toBookMarkEntity(),bookMarked)
 
             })
             binding.percent.setTextColor(

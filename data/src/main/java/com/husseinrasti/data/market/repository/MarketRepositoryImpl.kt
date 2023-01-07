@@ -51,12 +51,6 @@ class MarketRepositoryImpl @Inject constructor(
             ),
             remoteMediator = remoteMediator,
             pagingSourceFactory = { coinDataSource.getCoin()
-//                pagingSource.apply {
-//                    category = body.category
-//                    currency = body.currency
-//                    order = body.order
-//                    sparkline = body.sparkline
-//                }
             }
         ).flow
     }

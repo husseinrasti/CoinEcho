@@ -29,6 +29,7 @@ object BuildModules {
 
     object Features {
         const val MARKET = ":features:market"
+        const val BOOKMARK = ":features:bookMark"
     }
 
     object Core {

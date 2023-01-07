@@ -44,4 +44,5 @@
         app:layout_constraintTop_toBottomOf="@id/progressBar"
         tools:listitem="@layout/adapter_item_market" />
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

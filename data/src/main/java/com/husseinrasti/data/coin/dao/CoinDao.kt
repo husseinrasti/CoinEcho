@@ -39,7 +39,10 @@ interface CoinDao {
     fun select(id: String): Flow<CoinEntity.Item>
 
     @Query("SELECT * FROM tbl_coin")
-    fun select(): Flow<List<CoinEntity.Item>>
+    fun select():Flow<List<CoinEntity.Item>>
+
+    @Query("SELECT * FROM tbl_coin where id= :id ")
+    fun selectSingleCoin(id:String):PagingSource<Int,CoinEntity.Item>
 
     @Query("DELETE FROM tbl_coin")
     suspend fun clearAll()
@@ -52,4 +55,6 @@ interface CoinDao {
 
     @Query("update tbl_coin set bookmarked = :bookMarkState where id = :id ")
     suspend fun updateBookMark(bookMarkState:Int,id: String)
+
+
 }

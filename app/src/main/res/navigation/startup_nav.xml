@@ -20,6 +20,9 @@
     android:id="@+id/startup_nav"
     app:startDestination="@id/marketFragment">
 
+    <include
+        app:graph = "@navigation/bookmark_graph" />
+
     <fragment
         android:id="@+id/marketFragment"
         android:name="com.husseinrasti.market.MarketFragment"
