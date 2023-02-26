@@ -20,24 +20,15 @@ buildscript {
         mavenCentral()
         gradlePluginPortal()
     }
-    dependencies {
-        classpath("com.android.tools.build:gradle:7.0.4")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.42")
-//        classpath("com.google.gms:google-services:4.3.10")
-//        classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
-    }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-
-task("clean") {
-    delete(rootProject.buildDir)
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+//    alias(libs.plugins.firebase.crashlytics) apply false
+//    alias(libs.plugins.gms) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.secrets) apply false
 }

@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-rootProject.name = "CoinEcho"
-
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.name = "CoinEcho"
 
 includeBuild("build-logic")
 
