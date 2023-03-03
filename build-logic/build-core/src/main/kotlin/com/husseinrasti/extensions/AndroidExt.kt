@@ -55,13 +55,6 @@ fun Project.androidLibrary() {
 
         buildFeatures.viewBinding = true
 
-        lint.apply {
-            lintConfig = rootProject.file(".lint/config.xml")
-            isCheckAllWarnings = false
-            isWarningsAsErrors = false
-            isCheckReleaseBuilds = false
-        }
-
         flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
         productFlavors.apply {
             ProductFlavorDevelop.libraryCreate(this)

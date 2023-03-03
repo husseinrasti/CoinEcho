@@ -83,13 +83,6 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    lint.apply {
-        lintConfig = rootProject.file(".lint/config.xml")
-        isCheckAllWarnings = false
-        isWarningsAsErrors = false
-        isCheckReleaseBuilds = false
-    }
-
     applicationVariants.all {
         val variant = this
         variant.outputs

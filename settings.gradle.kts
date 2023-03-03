@@ -32,8 +32,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CoinEcho"
 
-includeBuild("build-logic")
-
 include(":app")
 include(":core")
 include(":data")

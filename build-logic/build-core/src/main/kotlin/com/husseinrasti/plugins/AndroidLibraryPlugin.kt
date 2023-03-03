@@ -33,7 +33,6 @@ class AndroidLibraryPlugin : Plugin<Project> {
         target.plugins.apply("kotlin-android")
         target.plugins.apply("kotlin-parcelize")
         target.plugins.apply("kotlin-kapt")
-        target.plugins.apply("androidx.navigation.safeargs.kotlin")
         target.plugins.apply("dagger.hilt.android.plugin")
         target.androidLibrary()
         target.kapt { correctErrorTypes = true }
