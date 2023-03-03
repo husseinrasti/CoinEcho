@@ -14,20 +14,47 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.extensions
+package com.husseinrasti.library
 
 
 import com.android.build.gradle.LibraryExtension
 import com.husseinrasti.build_core.*
+import com.husseinrasti.extensions.kotlinOptions
 import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.provideDelegate
 
 
 internal fun Project.android(configure: Action<LibraryExtension>): Unit =
     (this as ExtensionAware).extensions.configure("android", configure)
+
+
+internal fun Project.configureLibraryFlavor() {
+    android {
+        buildTypes.apply {
+            getByName(BuildType.RELEASE) {
+                isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
+                isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
+            }
+            getByName(BuildType.DEBUG) {
+                isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
+                isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
+                extra["enableCrashlytics"] = false
+                extra["alwaysUpdateBuildId"] = false
+            }
+        }
+
+
+        flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
+        productFlavors.apply {
+            ProductFlavorDevelop.libraryCreate(this)
+            ProductFlavorProduction.libraryCreate(this)
+        }
+    }
+}
 
 fun Project.androidLibrary() {
     android {

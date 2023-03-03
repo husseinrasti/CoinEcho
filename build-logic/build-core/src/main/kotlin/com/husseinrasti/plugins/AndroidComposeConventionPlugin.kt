@@ -17,6 +17,7 @@
 package com.husseinrasti.plugins
 
 import com.husseinrasti.extensions.*
+import com.husseinrasti.library.android
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

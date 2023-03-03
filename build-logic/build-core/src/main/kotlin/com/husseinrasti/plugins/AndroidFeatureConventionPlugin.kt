@@ -26,7 +26,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply("build.logic.android.library")
-            pluginManager.apply("build.logic.android.library.hilt")
+            pluginManager.apply("build.logic.android.hilt")
             dependencies {
                 add("testImplementation", kotlin("test"))
                 add("testImplementation", project(":core:testing"))

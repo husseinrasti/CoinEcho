@@ -50,6 +50,10 @@ gradlePlugin {
             id = "core-android-library"
             implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
         }
+        create("coreAndroidApplication") {
+            id = "build.logic.android.application"
+            implementationClass = "com.husseinrasti.plugins.AndroidApplicationConventionPlugin"
+        }
         create("coreAndroidLibrary") {
             id = "build.logic.android.library"
             implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
@@ -63,7 +67,7 @@ gradlePlugin {
             implementationClass = "com.husseinrasti.plugins.AndroidFeatureConventionPlugin"
         }
         create("buildLogicLibraryHilt") {
-            id = "build.logic.android.library.hilt"
+            id = "build.logic.android.hilt"
             implementationClass = "com.husseinrasti.plugins.AndroidHiltConventionPlugin"
         }
     }

@@ -17,59 +17,8 @@
 package com.husseinrasti.build_core
 
 import com.android.build.gradle.internal.dsl.ProductFlavor
-import com.husseinrasti.extensions.android
 import org.gradle.api.NamedDomainObjectContainer
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.extra
 
-
-fun Project.configureApplicationFlavor() {
-    android {
-        buildTypes.apply {
-            getByName(BuildType.RELEASE) {
-                isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-                isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
-            }
-            getByName(BuildType.DEBUG) {
-                isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
-                isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
-                extra["enableCrashlytics"] = false
-                extra["alwaysUpdateBuildId"] = false
-            }
-        }
-
-
-        flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
-        productFlavors.apply {
-            ProductFlavorDevelop.appCreate(this)
-            ProductFlavorProduction.appCreate(this)
-        }
-    }
-}
-
-fun Project.configureLibraryFlavor() {
-    android {
-        buildTypes.apply {
-            getByName(BuildType.RELEASE) {
-                isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-                isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
-            }
-            getByName(BuildType.DEBUG) {
-                isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
-                isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
-                extra["enableCrashlytics"] = false
-                extra["alwaysUpdateBuildId"] = false
-            }
-        }
-
-
-        flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
-        productFlavors.apply {
-            ProductFlavorDevelop.libraryCreate(this)
-            ProductFlavorProduction.libraryCreate(this)
-        }
-    }
-}
 
 interface BuildProductFlavor {
     val name: String
