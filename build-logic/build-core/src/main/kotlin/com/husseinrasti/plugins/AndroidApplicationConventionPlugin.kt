@@ -14,6 +14,23 @@
  * limitations under the License.
  */
 
-plugins {
-    `kotlin-dsl`
+package com.husseinrasti.plugins
+
+
+import com.husseinrasti.app.androidApplication
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+
+
+class AndroidApplicationConventionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            pluginManager.apply("com.android.application")
+            pluginManager.apply("org.jetbrains.kotlin.android")
+            pluginManager.apply("build.logic.android.hilt")
+            pluginManager.apply("kotlin-parcelize")
+            pluginManager.apply("kotlin-kapt")
+            androidApplication()
+        }
+    }
 }

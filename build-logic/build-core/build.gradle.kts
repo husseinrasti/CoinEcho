@@ -28,23 +28,17 @@ repositories {
     gradlePluginPortal()
 }
 
-object PluginsVersions {
-    const val GRADLE_ANDROID = "7.0.4"
-    const val KOTLIN = "1.6.10"
-    const val DOKKA = "0.10.0"
-    const val DAGGER_HILT = "2.42"
-    const val NAVIGATION = "2.3.5"
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:${PluginsVersions.GRADLE_ANDROID}")
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginsVersions.KOTLIN}")
-    implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
-    implementation("com.google.dagger:hilt-android-gradle-plugin:${PluginsVersions.DAGGER_HILT}")
-    implementation("androidx.navigation:navigation-safe-args-gradle-plugin:${PluginsVersions.NAVIGATION}")
+    implementation(libs.android.gradlePlugin)
+    implementation(libs.kotlin.gradlePlugin)
+    implementation(libs.ksp.gradlePlugin)
     implementation(project(":libs"))
 }
-
 
 gradlePlugin {
     plugins {
@@ -54,7 +48,27 @@ gradlePlugin {
         }
         create("core-android-library") {
             id = "core-android-library"
-            implementationClass = "com.husseinrasti.plugins.AndroidLibraryPlugin"
+            implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
+        }
+        create("coreAndroidApplication") {
+            id = "build.logic.android.application"
+            implementationClass = "com.husseinrasti.plugins.AndroidApplicationConventionPlugin"
+        }
+        create("coreAndroidLibrary") {
+            id = "build.logic.android.library"
+            implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
+        }
+        create("buildLogicLibraryCompose") {
+            id = "build.logic.android.library.compose"
+            implementationClass = "com.husseinrasti.plugins.AndroidComposeConventionPlugin"
+        }
+        create("buildLogicLibraryFeature") {
+            id = "build.logic.android.library.feature"
+            implementationClass = "com.husseinrasti.plugins.AndroidFeatureConventionPlugin"
+        }
+        create("buildLogicLibraryHilt") {
+            id = "build.logic.android.hilt"
+            implementationClass = "com.husseinrasti.plugins.AndroidHiltConventionPlugin"
         }
     }
 }

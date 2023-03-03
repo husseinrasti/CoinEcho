@@ -14,32 +14,26 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.extensions
+package com.husseinrasti.library
 
 
 import com.android.build.gradle.LibraryExtension
 import com.husseinrasti.build_core.*
+import com.husseinrasti.extensions.kotlinOptions
 import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
 import org.gradle.kotlin.dsl.extra
+import org.gradle.kotlin.dsl.provideDelegate
 
-
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 
 internal fun Project.android(configure: Action<LibraryExtension>): Unit =
     (this as ExtensionAware).extensions.configure("android", configure)
 
-fun Project.androidLibrary() {
-    android {
-        compileSdk = BuildAndroidConfig.COMPILE_SDK_VERSION
-        defaultConfig.multiDexEnabled = true
-        defaultConfig.minSdk = BuildAndroidConfig.MIN_SDK_VERSION
-        defaultConfig.targetSdk = BuildAndroidConfig.TARGET_SDK_VERSION
 
+internal fun Project.configureLibraryFlavor() {
+    android {
         buildTypes.apply {
             getByName(BuildType.RELEASE) {
                 isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
@@ -53,26 +47,45 @@ fun Project.androidLibrary() {
             }
         }
 
-        buildFeatures.viewBinding = true
-
-        lint.apply {
-            lintConfig = rootProject.file(".lint/config.xml")
-            isCheckAllWarnings = false
-            isWarningsAsErrors = false
-            isCheckReleaseBuilds = false
-        }
 
         flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
         productFlavors.apply {
             ProductFlavorDevelop.libraryCreate(this)
             ProductFlavorProduction.libraryCreate(this)
         }
+    }
+}
 
-        compileOptions.sourceCompatibility = JavaVersion.VERSION_1_8
-        compileOptions.targetCompatibility = JavaVersion.VERSION_1_8
+fun Project.androidLibrary() {
+    android {
+        compileSdk = BuildAndroidConfig.COMPILE_SDK_VERSION
+        defaultConfig.minSdk = BuildAndroidConfig.MIN_SDK_VERSION
+        defaultConfig.targetSdk = BuildAndroidConfig.TARGET_SDK_VERSION
+
+        configureLibraryFlavor()
+
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
+            isCoreLibraryDesugaringEnabled = true
+        }
 
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            // Treat all Kotlin warnings as errors (disabled by default)
+            // Override by setting warningsAsErrors=true in your ~/.gradle/gradle.properties
+            val warningsAsErrors: String? by project
+            allWarningsAsErrors = warningsAsErrors.toBoolean()
+
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-opt-in=kotlin.RequiresOptIn",
+                // Enable experimental coroutines APIs, including Flow
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.FlowPreview",
+                "-opt-in=kotlin.Experimental",
+            )
+
+            // Set JVM target to 11
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
 }

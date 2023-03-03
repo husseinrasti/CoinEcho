@@ -16,33 +16,24 @@
 
 package com.husseinrasti.plugins
 
+import com.husseinrasti.extensions.findLibrary
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
-import org.gradle.kotlin.dsl.apply
-import org.jetbrains.dokka.gradle.DokkaPlugin
-import org.jetbrains.dokka.gradle.DokkaTask
+class AndroidHiltConventionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            pluginManager.apply("dagger.hilt.android.plugin")
+            pluginManager.apply("org.jetbrains.kotlin.kapt")
 
-
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
-
-apply<DokkaPlugin>()
-
-tasks {
-    withType<DokkaTask> {
-        outputFormat = "html"
-        outputDirectory = "${rootProject.rootDir}/docs"
-
-        configuration {
-            moduleName = project.parent?.let { parentProject ->
-                if (parentProject.name == rootProject.name) {
-                    project.name
-                } else {
-                    "${parentProject.name}/${project.name}"
-                }
-            } ?: run {
-                project.name
+            dependencies {
+                add("implementation", findLibrary("hilt.android"))
+                add("kapt", findLibrary("hilt.compiler"))
+                add("kaptAndroidTest", findLibrary("hilt.compiler"))
             }
+
         }
     }
+
 }

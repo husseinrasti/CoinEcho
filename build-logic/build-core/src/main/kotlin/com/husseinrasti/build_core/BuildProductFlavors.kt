@@ -19,9 +19,7 @@ package com.husseinrasti.build_core
 import com.android.build.gradle.internal.dsl.ProductFlavor
 import org.gradle.api.NamedDomainObjectContainer
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
+
 interface BuildProductFlavor {
     val name: String
 

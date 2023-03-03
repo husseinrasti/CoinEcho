@@ -17,30 +17,19 @@
 package com.husseinrasti.plugins
 
 
-import com.husseinrasti.extensions.*
-import com.husseinrasti.extensions.kapt
+import com.husseinrasti.library.androidLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
 
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
-class AndroidLibraryPlugin : Plugin<Project> {
+class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply("com.android.library")
-        target.plugins.apply("kotlin-android")
-        target.plugins.apply("kotlin-parcelize")
-        target.plugins.apply("kotlin-kapt")
-        target.plugins.apply("androidx.navigation.safeargs.kotlin")
-        target.plugins.apply("dagger.hilt.android.plugin")
-        target.androidLibrary()
-        target.kapt { correctErrorTypes = true }
-        target.dependencies {
-            addJetpackDependencies()
-            addSupportDependencies()
-            addThirdPartyDependencies()
+        with(target) {
+            pluginManager.apply("com.android.library")
+            pluginManager.apply("kotlin-android")
+            pluginManager.apply("kotlin-parcelize")
+            pluginManager.apply("kotlin-kapt")
+            androidLibrary()
         }
     }
 }
