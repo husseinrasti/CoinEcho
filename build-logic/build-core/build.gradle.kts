@@ -48,7 +48,23 @@ gradlePlugin {
         }
         create("core-android-library") {
             id = "core-android-library"
-            implementationClass = "com.husseinrasti.plugins.AndroidLibraryPlugin"
+            implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
+        }
+        create("coreAndroidLibrary") {
+            id = "build.logic.android.library"
+            implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
+        }
+        create("buildLogicLibraryCompose") {
+            id = "build.logic.android.library.compose"
+            implementationClass = "com.husseinrasti.plugins.AndroidComposeConventionPlugin"
+        }
+        create("buildLogicLibraryFeature") {
+            id = "build.logic.android.library.feature"
+            implementationClass = "com.husseinrasti.plugins.AndroidFeatureConventionPlugin"
+        }
+        create("buildLogicLibraryHilt") {
+            id = "build.logic.android.library.hilt"
+            implementationClass = "com.husseinrasti.plugins.AndroidHiltConventionPlugin"
         }
     }
 }

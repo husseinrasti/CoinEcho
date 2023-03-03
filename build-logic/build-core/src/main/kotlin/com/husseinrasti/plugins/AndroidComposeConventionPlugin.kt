@@ -16,30 +16,37 @@
 
 package com.husseinrasti.plugins
 
-
 import com.husseinrasti.extensions.*
-import com.husseinrasti.extensions.kapt
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
+private fun Project.composeLibrary() {
+    android {
+        buildFeatures {
+            compose = true
+        }
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
-class AndroidLibraryPlugin : Plugin<Project> {
+        composeOptions {
+            kotlinCompilerExtensionVersion = libs().findVersion("androidxComposeCompiler").get().toString()
+        }
+
+        kotlinOptions {
+            freeCompilerArgs = freeCompilerArgs
+        }
+
+    }
+}
+
+class AndroidComposeConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        target.plugins.apply("com.android.library")
-        target.plugins.apply("kotlin-android")
-        target.plugins.apply("kotlin-parcelize")
-        target.plugins.apply("kotlin-kapt")
-        target.plugins.apply("dagger.hilt.android.plugin")
-        target.androidLibrary()
-        target.kapt { correctErrorTypes = true }
-        target.dependencies {
-            addJetpackDependencies()
-            addSupportDependencies()
-            addThirdPartyDependencies()
+        with(target) {
+            pluginManager.apply("build.logic.android.library")
+            composeLibrary()
+            dependencies {
+                add("implementation", platform(findLibrary("androidx-compose-bom")))
+                add("androidTestImplementation", platform(findLibrary("androidx-compose-bom")))
+            }
         }
     }
 }

@@ -23,12 +23,8 @@ import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
-import org.gradle.kotlin.dsl.extra
+import org.gradle.kotlin.dsl.provideDelegate
 
-
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 
 internal fun Project.android(configure: Action<LibraryExtension>): Unit =
     (this as ExtensionAware).extensions.configure("android", configure)
@@ -36,36 +32,33 @@ internal fun Project.android(configure: Action<LibraryExtension>): Unit =
 fun Project.androidLibrary() {
     android {
         compileSdk = BuildAndroidConfig.COMPILE_SDK_VERSION
-        defaultConfig.multiDexEnabled = true
         defaultConfig.minSdk = BuildAndroidConfig.MIN_SDK_VERSION
         defaultConfig.targetSdk = BuildAndroidConfig.TARGET_SDK_VERSION
 
-        buildTypes.apply {
-            getByName(BuildType.RELEASE) {
-                isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-                isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
-            }
-            getByName(BuildType.DEBUG) {
-                isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
-                isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
-                extra["enableCrashlytics"] = false
-                extra["alwaysUpdateBuildId"] = false
-            }
+        configureLibraryFlavor()
+
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_11
+            targetCompatibility = JavaVersion.VERSION_11
+            isCoreLibraryDesugaringEnabled = true
         }
-
-        buildFeatures.viewBinding = true
-
-        flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
-        productFlavors.apply {
-            ProductFlavorDevelop.libraryCreate(this)
-            ProductFlavorProduction.libraryCreate(this)
-        }
-
-        compileOptions.sourceCompatibility = JavaVersion.VERSION_1_8
-        compileOptions.targetCompatibility = JavaVersion.VERSION_1_8
 
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_1_8.toString()
+            // Treat all Kotlin warnings as errors (disabled by default)
+            // Override by setting warningsAsErrors=true in your ~/.gradle/gradle.properties
+            val warningsAsErrors: String? by project
+            allWarningsAsErrors = warningsAsErrors.toBoolean()
+
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-opt-in=kotlin.RequiresOptIn",
+                // Enable experimental coroutines APIs, including Flow
+                "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+                "-opt-in=kotlinx.coroutines.FlowPreview",
+                "-opt-in=kotlin.Experimental",
+            )
+
+            // Set JVM target to 11
+            jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
 }

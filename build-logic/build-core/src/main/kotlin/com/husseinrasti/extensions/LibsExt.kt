@@ -17,12 +17,20 @@
 package com.husseinrasti.extensions
 
 import com.husseinrasti.libs.*
+import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.support.delegates.DependencyHandlerDelegate
 
 /**
  * Created by Hussein Rasti on 2/22/22.
  */
+
+fun Project.libs() =
+    extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+fun Project.findLibrary(name: String) = libs().findLibrary(name).get()
 
 fun DependencyHandler.addJetpackDependencies() {
     implementation(Dependencies.kotlin)
