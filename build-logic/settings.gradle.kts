@@ -26,5 +26,8 @@ dependencyResolutionManagement {
     }
 }
 
-include(":build-core")
+include(":convention")
+project(":convention").buildFileName = "convention.gradle.kts"
+
 include(":libs")
+project(":libs").buildFileName = "libs.gradle.kts"

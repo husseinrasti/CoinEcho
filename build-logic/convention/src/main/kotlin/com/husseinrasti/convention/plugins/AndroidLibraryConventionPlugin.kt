@@ -14,26 +14,32 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.plugins
+package com.husseinrasti.convention.plugins
 
-import com.husseinrasti.extensions.findLibrary
+import com.husseinrasti.convention.extensions.addGoogleDependencies
+import com.husseinrasti.convention.extensions.addJetpackDependencies
+import com.husseinrasti.convention.extensions.addSupportDependencies
+import com.husseinrasti.convention.extensions.addThirdPartyDependencies
+import com.husseinrasti.convention.library.androidLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
-class AndroidHiltConventionPlugin : Plugin<Project> {
+class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("dagger.hilt.android.plugin")
+            pluginManager.apply("com.android.library")
+            pluginManager.apply("org.jetbrains.kotlin.android")
             pluginManager.apply("org.jetbrains.kotlin.kapt")
-
+            pluginManager.apply("build.logic.android.hilt")
+            androidLibrary()
             dependencies {
-                add("implementation", findLibrary("hilt.android"))
-                add("kapt", findLibrary("hilt.compiler"))
-                add("kaptAndroidTest", findLibrary("hilt.compiler"))
+                //TODO remove these and find library in libs config
+                addSupportDependencies()
+                addGoogleDependencies()
+                addJetpackDependencies()
+                addThirdPartyDependencies()
             }
-
         }
     }
-
 }

@@ -14,26 +14,20 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.build_core
+package com.husseinrasti.convention.plugins
 
+import com.husseinrasti.convention.app.androidApplication
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
-object BuildModules {
-    const val APP = ":app"
-    const val CORE = ":core"
-    const val COMPONENTS = ":components"
-    const val DATA = ":data"
-    const val DOMAIN = ":domain"
-
-    object Features {
-        const val MARKET = ":features:market"
+class AndroidApplicationConventionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            pluginManager.apply("com.android.application")
+            pluginManager.apply("org.jetbrains.kotlin.android")
+            pluginManager.apply("org.jetbrains.kotlin.kapt")
+            pluginManager.apply("build.logic.android.hilt")
+            androidApplication()
+        }
     }
-
-    object Core {
-        const val MODEL = ":core-model"
-        const val NETWORK = ":core-network"
-    }
-
 }

@@ -14,14 +14,23 @@
  * limitations under the License.
  */
 
-package com.husseinrasti
+package com.husseinrasti.convention.base
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
-class BuildCorePlugin : Plugin<Project> {
-    override fun apply(target: Project) {}
+object BuildModules {
+    const val APP = ":app"
+    const val CORE = ":core"
+    const val COMPONENTS = ":components"
+    const val DATA = ":data"
+    const val DOMAIN = ":domain"
+
+    object Features {
+        const val MARKET = ":features:market"
+    }
+
+    object Core {
+        const val MODEL = ":core-model"
+        const val NETWORK = ":core-network"
+    }
+
 }

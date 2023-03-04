@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.app
+package com.husseinrasti.convention.library
 
 
-import com.android.build.gradle.internal.api.BaseVariantOutputImpl
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import com.husseinrasti.build_core.*
-import com.husseinrasti.extensions.kapt
-import com.husseinrasti.extensions.kotlinOptions
+import com.android.build.gradle.LibraryExtension
+import com.husseinrasti.convention.base.*
+import com.husseinrasti.convention.extensions.kotlinOptions
 import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
@@ -30,59 +28,45 @@ import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.provideDelegate
 
 
-internal fun Project.android(configure: Action<BaseAppModuleExtension>): Unit =
+internal fun Project.android(configure: Action<LibraryExtension>): Unit =
     (this as ExtensionAware).extensions.configure("android", configure)
 
-internal fun Project.configureApplicationFlavor() {
+
+internal fun Project.configureLibraryFlavor() {
     android {
         buildTypes.apply {
             getByName(BuildType.RELEASE) {
-                proguardFiles("proguard-android-optimize.txt", "proguard-rules.pro")
                 isMinifyEnabled = BuildTypeRelease.isMinifyEnabled
-                isShrinkResources = BuildTypeRelease.isShrinkResources
                 isTestCoverageEnabled = BuildTypeRelease.isTestCoverageEnabled
             }
-
             getByName(BuildType.DEBUG) {
                 isMinifyEnabled = BuildTypeDebug.isMinifyEnabled
-                isShrinkResources = BuildTypeDebug.isShrinkResources
                 isTestCoverageEnabled = BuildTypeDebug.isTestCoverageEnabled
                 extra["enableCrashlytics"] = false
                 extra["alwaysUpdateBuildId"] = false
             }
         }
 
+
         flavorDimensions.add(BuildProductDimensions.ENVIRONMENT)
         productFlavors.apply {
-            ProductFlavorDevelop.appCreate(this)
-            ProductFlavorProduction.appCreate(this)
+            ProductFlavorDevelop.libraryCreate(this)
+            ProductFlavorProduction.libraryCreate(this)
         }
     }
 }
 
-
-fun Project.androidApplication() {
+fun Project.androidLibrary() {
     android {
         compileSdk = BuildAndroidConfig.COMPILE_SDK_VERSION
         buildToolsVersion = BuildAndroidConfig.BUILD_TOOLS_VERSION
         defaultConfig.minSdk = BuildAndroidConfig.MIN_SDK_VERSION
         defaultConfig.targetSdk = BuildAndroidConfig.TARGET_SDK_VERSION
         defaultConfig.multiDexEnabled = true
-        defaultConfig.versionCode = BuildAndroidConfig.VERSION_CODE
-        defaultConfig.versionName = BuildAndroidConfig.VERSION_NAME
-        defaultConfig.vectorDrawables.useSupportLibrary = BuildAndroidConfig.SUPPORT_LIBRARY_VECTOR_DRAWABLES
-        defaultConfig.testInstrumentationRunner = BuildAndroidConfig.TEST_INSTRUMENTATION_RUNNER
 
-        applicationVariants.all {
-            val variant = this
-            variant.outputs
-                .map { it as BaseVariantOutputImpl }
-                .forEach { output ->
-                    output.outputFileName = "CoinEcho_${variant.name}_v.${variant.versionName}.apk"
-                }
-        }
+        buildFeatures.viewBinding = true
 
-        configureApplicationFlavor()
+        configureLibraryFlavor()
 
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_11
@@ -108,9 +92,4 @@ fun Project.androidApplication() {
             jvmTarget = JavaVersion.VERSION_11.toString()
         }
     }
-
-    kapt {
-        correctErrorTypes = true
-    }
-
 }

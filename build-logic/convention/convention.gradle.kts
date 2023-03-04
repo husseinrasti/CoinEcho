@@ -19,7 +19,7 @@ plugins {
     `java-gradle-plugin`
 }
 
-//group = "com.husseinrasti"
+//group = "com.husseinrasti.convention"
 //version = "1.0.0"
 
 repositories {
@@ -44,31 +44,27 @@ gradlePlugin {
     plugins {
         create("core-plugin") {
             id = "core-plugin"
-            implementationClass = "com.husseinrasti.BuildCorePlugin"
-        }
-        create("core-android-library") {
-            id = "core-android-library"
-            implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
+            implementationClass = "com.husseinrasti.convention.BuildCorePlugin"
         }
         create("coreAndroidApplication") {
             id = "build.logic.android.application"
-            implementationClass = "com.husseinrasti.plugins.AndroidApplicationConventionPlugin"
+            implementationClass = "com.husseinrasti.convention.plugins.AndroidApplicationConventionPlugin"
         }
         create("coreAndroidLibrary") {
             id = "build.logic.android.library"
-            implementationClass = "com.husseinrasti.plugins.AndroidLibraryConventionPlugin"
+            implementationClass = "com.husseinrasti.convention.plugins.AndroidLibraryConventionPlugin"
         }
         create("buildLogicLibraryCompose") {
             id = "build.logic.android.library.compose"
-            implementationClass = "com.husseinrasti.plugins.AndroidComposeConventionPlugin"
+            implementationClass = "com.husseinrasti.convention.plugins.AndroidComposeConventionPlugin"
         }
         create("buildLogicLibraryFeature") {
             id = "build.logic.android.library.feature"
-            implementationClass = "com.husseinrasti.plugins.AndroidFeatureConventionPlugin"
+            implementationClass = "com.husseinrasti.convention.plugins.AndroidFeatureConventionPlugin"
         }
         create("buildLogicLibraryHilt") {
             id = "build.logic.android.hilt"
-            implementationClass = "com.husseinrasti.plugins.AndroidHiltConventionPlugin"
+            implementationClass = "com.husseinrasti.convention.plugins.AndroidHiltConventionPlugin"
         }
     }
 }

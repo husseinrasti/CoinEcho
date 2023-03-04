@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.extensions
+package com.husseinrasti.convention.extensions
 
 
 import org.gradle.api.Action
@@ -25,10 +25,6 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.gradle.api.plugins.ExtensionAware
 
-
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 
 internal fun LibraryExtension.kotlinOptions(configure: Action<KotlinJvmOptions>): Unit =
     (this as ExtensionAware).extensions.configure("kotlinOptions", configure)

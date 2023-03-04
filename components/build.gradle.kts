@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.husseinrasti.build_core.BuildModules
+import com.husseinrasti.convention.base.BuildModules
 
 plugins {
-    id("core-android-library")
+    id("build.logic.android.library")
 }
 
 dependencies {

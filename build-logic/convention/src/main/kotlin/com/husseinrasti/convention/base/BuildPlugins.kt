@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.build_core
+package com.husseinrasti.convention.base
 
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 object BuildPlugins {
     const val ANDROID_APPLICATION = "com.android.application"
     const val ANDROID_DYNAMIC_FEATURE = "com.android.dynamic-feature"

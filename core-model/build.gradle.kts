@@ -15,5 +15,5 @@
  */
 
 plugins {
-    id("core-android-library")
+    id("build.logic.android.library")
 }

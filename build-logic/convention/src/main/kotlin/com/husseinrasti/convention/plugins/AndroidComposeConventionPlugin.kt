@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.plugins
+package com.husseinrasti.convention.plugins
 
-import com.husseinrasti.extensions.*
-import com.husseinrasti.library.android
+import com.husseinrasti.convention.extensions.findLibrary
+import com.husseinrasti.convention.extensions.kotlinOptions
+import com.husseinrasti.convention.extensions.libs
+import com.husseinrasti.convention.library.android
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies

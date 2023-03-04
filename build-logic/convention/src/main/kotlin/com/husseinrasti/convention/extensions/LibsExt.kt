@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.extensions
+package com.husseinrasti.convention.extensions
 
 import com.husseinrasti.libs.*
 import org.gradle.api.Project
@@ -23,17 +23,12 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.support.delegates.DependencyHandlerDelegate
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
-
 fun Project.libs() =
     extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 fun Project.findLibrary(name: String) = libs().findLibrary(name).get()
 
 fun DependencyHandler.addJetpackDependencies() {
-    implementation(Dependencies.kotlin)
     implementation(Dependencies.coreKtx)
     implementation(Dependencies.multidex)
     implementation(Dependencies.securityCrypto)
@@ -50,8 +45,6 @@ fun DependencyHandler.addJetpackDependencies() {
     implementation(Dependencies.roomKtx)
     implementation(Dependencies.roomRuntime)
     kapt(AnnotationProcessing.roomCompiler)
-    implementation(DaggerHilt.daggerHilt)
-    kapt(DaggerHilt.daggerHiltCompiler)
 }
 
 fun DependencyHandlerDelegate.addGoogleDependencies() {

@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.build_core
+package com.husseinrasti.convention.base
 
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 object BuildAndroidConfig {
     const val APPLICATION_ID = "com.husseinrasti.coinecho"
 
     const val BUILD_TOOLS_VERSION = "33.0.0"
     const val COMPILE_SDK_VERSION = 33
-    const val MIN_SDK_VERSION = 21
+    const val MIN_SDK_VERSION = 23
     const val TARGET_SDK_VERSION = 33
 
     const val VERSION_CODE = 1

@@ -14,23 +14,26 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.plugins
+package com.husseinrasti.convention.plugins
 
-
-import com.husseinrasti.app.androidApplication
+import com.husseinrasti.convention.extensions.findLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
-
-class AndroidApplicationConventionPlugin : Plugin<Project> {
+class AndroidHiltConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("com.android.application")
-            pluginManager.apply("org.jetbrains.kotlin.android")
-            pluginManager.apply("build.logic.android.hilt")
-            pluginManager.apply("kotlin-parcelize")
-            pluginManager.apply("kotlin-kapt")
-            androidApplication()
+            pluginManager.apply("dagger.hilt.android.plugin")
+            pluginManager.apply("org.jetbrains.kotlin.kapt")
+
+            dependencies {
+                add("implementation", findLibrary("hilt.android"))
+                add("kapt", findLibrary("hilt.compiler"))
+                add("kaptAndroidTest", findLibrary("hilt.compiler"))
+            }
+
         }
     }
+
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.build_core
+package com.husseinrasti.convention.base
 
 import com.android.build.gradle.internal.dsl.ProductFlavor
 import org.gradle.api.NamedDomainObjectContainer

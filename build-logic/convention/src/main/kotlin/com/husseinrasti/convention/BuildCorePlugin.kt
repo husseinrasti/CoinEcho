@@ -14,22 +14,11 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.plugins
+package com.husseinrasti.convention
 
-
-import com.husseinrasti.library.androidLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-
-class AndroidLibraryConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project) {
-        with(target) {
-            pluginManager.apply("com.android.library")
-            pluginManager.apply("kotlin-android")
-            pluginManager.apply("kotlin-parcelize")
-            pluginManager.apply("kotlin-kapt")
-            androidLibrary()
-        }
-    }
+class BuildCorePlugin : Plugin<Project> {
+    override fun apply(target: Project) {}
 }

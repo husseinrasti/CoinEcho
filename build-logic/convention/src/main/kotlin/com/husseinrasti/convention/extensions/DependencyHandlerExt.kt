@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.extensions
+package com.husseinrasti.convention.extensions
 
 
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.*
-
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 
 /**
  * Adds a dependency to the `debugImplementation` configuration.

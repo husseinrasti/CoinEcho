@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.husseinrasti.build_core
+package com.husseinrasti.convention.base
 
 
-/**
- * Created by Hussein Rasti on 2/22/22.
- */
 interface BuildType {
 
     companion object {
